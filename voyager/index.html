@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Voyager - Explore the Unseen</title>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="css/shared.css" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-container": "#fffbff",
+                        "on-secondary-fixed-variant": "#763300",
+                        "secondary-container": "#fc8a40",
+                        "tertiary-container": "#9c6b00",
+                        "on-primary-fixed-variant": "#004493",
+                        "outline": "#717786",
+                        "surface-container-high": "#e7e8e9",
+                        "inverse-surface": "#2e3132",
+                        "secondary-fixed": "#ffdbc9",
+                        "primary-fixed": "#d8e2ff",
+                        "secondary-fixed-dim": "#ffb68d",
+                        "surface-variant": "#e1e3e4",
+                        "on-primary-fixed": "#001a41",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#edeeef",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#005bc0",
+                        "on-background": "#191c1d",
+                        "tertiary-fixed": "#ffdead",
+                        "surface-dim": "#d9dadb",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "inverse-primary": "#adc7ff",
+                        "on-secondary-container": "#672c00",
+                        "primary-container": "#0070ea",
+                        "surface-bright": "#f8f9fa",
+                        "on-tertiary-fixed-variant": "#604100",
+                        "surface": "#f8f9fa",
+                        "outline-variant": "#c1c6d7",
+                        "on-surface-variant": "#414754",
+                        "tertiary-fixed-dim": "#ffba3c",
+                        "primary": "#0059bb",
+                        "on-secondary-fixed": "#331200",
+                        "primary-fixed-dim": "#adc7ff",
+                        "surface-container-low": "#f3f4f5",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#281900",
+                        "on-primary-container": "#fefcff",
+                        "on-surface": "#191c1d",
+                        "tertiary": "#7c5400",
+                        "background": "#f8f9fa",
+                        "error-container": "#ffdad6",
+                        "secondary": "#9b4500"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Be Vietnam Pro"],
+                        "label": ["Be Vietnam Pro"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            box-shadow: 0 24px 48px -12px rgba(25, 28, 29, 0.08);
+        }
+        .glass-nav {
+            background: rgba(248, 249, 250, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        
+        .dark .glass-nav {
+            background: rgba(17, 24, 39, 0.8);
+        }
+        .text-overlap {
+            text-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+    <!-- TopAppBar -->
+    <header class="bg-surface dark:bg-gray-900 docked full-width top-0 z-40 sticky border-b border-outline-variant/10">
+        <div class="flex justify-between items-center w-full px-4 md:px-6 py-4">
+            <div class="flex items-center gap-2 md:gap-4">
+                <button id="mobile-menu-btn" class="md:hidden text-primary dark:text-blue-400 hover:opacity-80 transition-opacity active:scale-95 duration-200" onclick="toggleMobileMenu()">
+                    <span class="material-symbols-outlined" id="menu-icon">menu</span>
+                </button>
+                <span class="text-xl md:text-2xl font-extrabold text-primary dark:text-blue-400 tracking-tighter font-['Plus_Jakarta_Sans']">Voyager</span>
+            </div>
+            <nav id="desktop-nav" class="hidden md:flex items-center gap-6 lg:gap-8">
+                <a class="text-primary dark:text-blue-400 font-['Plus_Jakarta_Sans'] font-bold text-sm lg:text-base tracking-tight hover:opacity-80 transition-opacity" data-nav-link="index.html" href="index.html">Explore</a>
+                <a class="text-gray-500 dark:text-gray-400 font-['Plus_Jakarta_Sans'] font-bold text-sm lg:text-base tracking-tight hover:opacity-80 transition-opacity" data-nav-link="routes.html" href="routes.html">Routes</a>
+                <a class="text-gray-500 dark:text-gray-400 font-['Plus_Jakarta_Sans'] font-bold text-sm lg:text-base tracking-tight hover:opacity-80 transition-opacity" data-nav-link="trip-planner.html" href="trip-planner.html">My Trips</a>
+                <a class="text-gray-500 dark:text-gray-400 font-['Plus_Jakarta_Sans'] font-bold text-sm lg:text-base tracking-tight hover:opacity-80 transition-opacity" data-nav-link="finance-planner.html" href="finance-planner.html">Finance</a>
+                <a class="text-gray-500 dark:text-gray-400 font-['Plus_Jakarta_Sans'] font-bold text-sm lg:text-base tracking-tight hover:opacity-80 transition-opacity" data-nav-link="profile.html" href="profile.html">Profile</a>
+            </nav>
+            <div class="flex items-center gap-2 md:gap-3">
+                <img alt="User profile avatar" class="w-8 md:w-10 h-8 md:h-10 rounded-full object-cover border-2 border-primary-container/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn2MH8kB-jhF4b1RQq-kz2HcJHOhP1RFg_pVMLRd4fH6bDjoCYweZKVFJbHSavCpzCPjG_FDcYKrmcRLd9xpw4d_0d-HH9nu_0rHRt3rHMqSkyJRoJhGvnmHKiq9i4Y1JA8aFhL7nw2laVTlDn1NC5HHmoDdx0QNIHsb-aK9xocIv_gWpDHI3UYbzvQ268zu0eBhUWwCMhU20LZblUFYMKMsMs5q35Ggt_bA_jB8gSKbxBC36TjAHFdK3cI7xEQIK1Es0UHCUDJNyv"/>
+                <div class="hidden md:flex gap-1 lg:gap-2">
+                    <button class="text-on-surface-variant hover:text-on-surface transition-colors p-1" data-theme-toggle onclick="ThemeManager.toggle()" title="Toggle Dark Mode">
+                        <span class="material-symbols-outlined text-sm md:text-base">dark_mode</span>
+                    </button>
+                    <button class="text-on-surface-variant hover:text-on-surface transition-colors p-1" title="Help">
+                        <span class="material-symbols-outlined text-sm md:text-base">help</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <nav id="mobile-menu" class="hidden md:hidden bg-surface-container-lowest dark:bg-gray-800 border-t border-outline-variant/20 max-h-0 overflow-hidden transition-all duration-300">
+            <div class="px-4 py-4 space-y-2">
+                <a class="block text-primary dark:text-blue-400 font-['Plus_Jakarta_Sans'] font-bold py-2 px-4 rounded hover:bg-primary/10 transition-colors" data-nav-link="index.html" href="index.html">Explore</a>
+                <a class="block text-gray-600 dark:text-gray-400 font-['Plus_Jakarta_Sans'] font-bold py-2 px-4 rounded hover:bg-primary/10 transition-colors" data-nav-link="routes.html" href="routes.html">Routes</a>
+                <a class="block text-gray-600 dark:text-gray-400 font-['Plus_Jakarta_Sans'] font-bold py-2 px-4 rounded hover:bg-primary/10 transition-colors" data-nav-link="trip-planner.html" href="trip-planner.html">My Trips</a>
+                <a class="block text-gray-600 dark:text-gray-400 font-['Plus_Jakarta_Sans'] font-bold py-2 px-4 rounded hover:bg-primary/10 transition-colors" data-nav-link="finance-planner.html" href="finance-planner.html">Finance</a>
+                <a class="block text-gray-600 dark:text-gray-400 font-['Plus_Jakarta_Sans'] font-bold py-2 px-4 rounded hover:bg-primary/10 transition-colors" data-nav-link="profile.html" href="profile.html">Profile</a>
+            </div>
+        </nav>
+    </header>
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            const isOpen = menu.classList.contains('hidden');
+            if (isOpen) {
+                menu.classList.remove('hidden');
+                menu.style.maxHeight = menu.scrollHeight + 'px';
+                icon.textContent = 'close';
+            } else {
+                menu.style.maxHeight = '0';
+                icon.textContent = 'menu';
+                setTimeout(() => menu.classList.add('hidden'), 300);
+            }
+        }
+    </script>
+    <main class="min-h-screen pb-32">
+    <script src="js/api-config.js"></script>
+
+        <!-- Hero Section -->
+        <section class="relative h-[618px] flex items-center px-6 md:px-20 overflow-hidden mb-12">
+            <div class="absolute inset-0 z-0">
+                <img alt="Scenic mountain landscape" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGX9XZfJReFAsy_H-Ha4RKG9jky5e3n7OxDvY_mUtDD3BgaR0JyZvV2E3ITZHVXlj7icmkwPrhsYqhy5hD-qiLyAlgiCunHu6dwXgAju4rRXzR2vDycdu-73Wmpy9Wwm-2FIHbhSo3y74VgZYyiBd5l44o4UyYOzNn1d2b1tYsQinXnls163FY9XEZ6apxdu6-zh4k-MxX_B7GVzwWhe80IOk_zONbH-6u2IsoLSvs1QQLQiqvoZ-x1Sivsi8MkficYwwE4p33s_Xm"/>
+                <div class="absolute inset-0 bg-gradient-to-r from-on-surface/40 to-transparent"></div>
+            </div>
+            <div class="relative z-10 max-w-4xl">
+                <h1 class="font-headline text-5xl md:text-8xl font-extrabold text-white leading-[1.1] tracking-tight mb-8">
+                    Seek the <span class="italic font-light">Unseen</span>
+                </h1>
+                <div class="flex flex-col md:flex-row gap-4 max-w-2xl bg-surface-container-lowest/10 backdrop-blur-md p-2 rounded-full border border-white/20">
+                    <div class="flex-1 flex items-center gap-3 px-6 py-3">
+                        <span class="material-symbols-outlined text-white" data-icon="search">search</span>
+                        <input class="bg-transparent border-none focus:ring-0 text-white placeholder-white/70 w-full font-body" placeholder="Where do you want to wander?" type="text" data-search-input/>
+                    </div>
+                    <button class="bg-gradient-to-r from-primary to-primary-container text-on-primary px-8 py-4 rounded-full font-bold hover:shadow-lg transition-all flex items-center justify-center gap-2" data-search-btn>
+                        <span>Search</span>
+                        <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <!-- Location Selector -->
+        <section class="px-6 md:px-20 mb-12">
+            <div class="bg-gradient-to-r from-primary/10 to-primary-container/10 border border-primary/20 rounded-2xl p-6 md:p-8">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                    <div>
+                        <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">Your Location</p>
+                        <h2 class="text-2xl md:text-3xl font-bold text-on-surface">Where are you starting from?</h2>
+                        <p class="text-sm text-on-surface-variant mt-2">Prices are calculated based on the distance from your location</p>
+                    </div>
+                    <div class="w-full md:w-auto relative">
+                        <div class="flex items-center gap-2 bg-surface-container-lowest border border-outline-variant/30 rounded-full px-4 py-3 focus-within:ring-2 focus-within:ring-primary transition-all">
+                            <span class="material-symbols-outlined text-primary">location_on</span>
+                            <input class="bg-transparent border-none focus:ring-0 text-on-surface placeholder-on-surface-variant flex-1 font-body" placeholder="Enter or select a city..." type="text" data-location-input/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Category Filters -->
+        <section class="px-6 md:px-20 mb-16 overflow-x-auto no-scrollbar">
+            <div class="flex items-center gap-4 justify-between flex-wrap">
+                <div class="flex items-center gap-4 flex-wrap">
+                    <button class="flex items-center gap-2 px-8 py-3 bg-primary text-on-primary rounded-full font-label font-semibold text-sm tracking-wider whitespace-nowrap transition-transform active:scale-95 active" data-filter-btn="all">
+                        <span class="material-symbols-outlined material-symbols-filled" data-icon="explore">explore</span>
+                        ALL DESTINATIONS
+                    </button>
+                    <button class="flex items-center gap-2 px-8 py-3 bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant rounded-full font-label font-semibold text-sm tracking-wider whitespace-nowrap transition-transform active:scale-95" data-filter-btn="beaches">
+                        <span class="material-symbols-outlined" data-icon="beach_access">beach_access</span>
+                        BEACHES
+                    </button>
+                    <button class="flex items-center gap-2 px-8 py-3 bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant rounded-full font-label font-semibold text-sm tracking-wider whitespace-nowrap transition-transform active:scale-95" data-filter-btn="cities">
+                        <span class="material-symbols-outlined" data-icon="apartment">apartment</span>
+                        CITIES
+                    </button>
+                    <button class="flex items-center gap-2 px-8 py-3 bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant rounded-full font-label font-semibold text-sm tracking-wider whitespace-nowrap transition-transform active:scale-95" data-filter-btn="mountains">
+                        <span class="material-symbols-outlined" data-icon="terrain">terrain</span>
+                        MOUNTAINS
+                    </button>
+                </div>
+                <div class="flex items-center gap-2">
+                    <label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Sort by</label>
+                    <select class="bg-surface-container-lowest border border-outline-variant/20 rounded-full px-4 py-2 text-sm font-semibold text-on-surface cursor-pointer focus:ring-2 focus:ring-primary transition-all" data-sort-select aria-label="Sort attractions by">
+                        <option value="featured">Featured</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                        <option value="name">Name (A-Z)</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+        <!-- Featured Attractions: Bento Grid -->
+        <section class="px-6 md:px-20">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6" data-attractions-grid>
+                <!-- Attractions will be rendered here by JavaScript -->
+            </div>
+        </section>
+    </main>
+    <!-- BottomNavBar -->
+    <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#f8f9fa]/80 dark:bg-gray-900/80 backdrop-blur-xl border-t border-[#c1c6d7]/15 shadow-[0_-4px_24px_rgba(25,28,29,0.06)] md:hidden">
+        <a class="flex flex-col items-center justify-center bg-[#0070ea]/10 text-[#0059bb] dark:text-blue-300 rounded-2xl px-4 py-2 active" data-nav-link="index.html" href="index.html">
+            <span class="material-symbols-outlined material-symbols-filled">explore</span>
+            <span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-[0.05em] mt-1">Explore</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 px-4 py-2 hover:bg-gray-200/50" data-nav-link="trip-planner.html" href="trip-planner.html">
+            <span class="material-symbols-outlined">map</span>
+            <span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-[0.05em] mt-1">My Trips</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 px-4 py-2 hover:bg-gray-200/50" data-nav-link="finance-planner.html" href="finance-planner.html">
+            <span class="material-symbols-outlined">payments</span>
+            <span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-[0.05em] mt-1">Finance</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 px-4 py-2 hover:bg-gray-200/50" data-nav-link="profile.html" href="profile.html">
+            <span class="material-symbols-outlined">person</span>
+            <span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-[0.05em] mt-1">Profile</span>
+        </a>
+    </nav>
+    <!-- FAB -->
+    <button class="fixed bottom-24 right-6 md:bottom-12 md:right-12 z-40 bg-gradient-to-br from-secondary to-secondary-container text-on-secondary w-16 h-16 rounded-full flex items-center justify-center editorial-shadow hover:scale-110 active:scale-95 transition-transform" onclick="window.location.href='routes.html'" title="Plan a route">
+        <span class="material-symbols-outlined material-symbols-filled text-2xl">route</span>
+    </button>
+    <!-- API Configuration and Managers -->
+    <script src="js/api-config.js"></script>
+    <script src="js/geolocation.js"></script>
+    <script src="js/attractions-api.js"></script>
+    <script src="js/directions.js"></script>
+    <script src="js/trip-exporter.js"></script>
+    
+    <!-- Application Scripts -->
+    <script src="js/navigation.js"></script>
+    <script src="js/explore.js"></script>
+</body>
+</html>

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Trip Planning & Costs - Voyager Travel Planner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="css/shared.css" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-container": "#fffbff",
+                        "on-secondary-fixed-variant": "#763300",
+                        "secondary-container": "#fc8a40",
+                        "tertiary-container": "#9c6b00",
+                        "on-primary-fixed-variant": "#004493",
+                        "outline": "#717786",
+                        "surface-container-high": "#e7e8e9",
+                        "inverse-surface": "#2e3132",
+                        "secondary-fixed": "#ffdbc9",
+                        "primary-fixed": "#d8e2ff",
+                        "secondary-fixed-dim": "#ffb68d",
+                        "surface-variant": "#e1e3e4",
+                        "on-primary-fixed": "#001a41",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#edeeef",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#005bc0",
+                        "on-background": "#191c1d",
+                        "tertiary-fixed": "#ffdead",
+                        "surface-dim": "#d9dadb",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "inverse-primary": "#adc7ff",
+                        "on-secondary-container": "#672c00",
+                        "primary-container": "#0070ea",
+                        "surface-bright": "#f8f9fa",
+                        "on-tertiary-fixed-variant": "#604100",
+                        "surface": "#f8f9fa",
+                        "outline-variant": "#c1c6d7",
+                        "on-surface-variant": "#414754",
+                        "tertiary-fixed-dim": "#ffba3c",
+                        "primary": "#0059bb",
+                        "on-secondary-fixed": "#331200",
+                        "primary-fixed-dim": "#adc7ff",
+                        "surface-container-low": "#f3f4f5",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#281900",
+                        "on-primary-container": "#fefcff",
+                        "on-surface": "#191c1d",
+                        "tertiary": "#7c5400",
+                        "background": "#f8f9fa",
+                        "error-container": "#ffdad6",
+                        "secondary": "#9b4500"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Be Vietnam Pro"],
+                        "label": ["Be Vietnam Pro"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+    <!-- TopAppBar -->
+    <header class="fixed top-0 w-full z-50 bg-[#f8f9fa] dark:bg-gray-900 flex justify-between items-center px-4 md:px-6 py-4 border-b border-outline-variant/10">
+        <div class="flex items-center gap-2 md:gap-4">
+            <button id="mobile-menu-btn" class="md:hidden material-symbols-outlined text-[#0059bb] hover:opacity-80 transition-opacity active:scale-95 duration-200" onclick="toggleMobileMenu()">menu</button>
+            <h1 class="text-xl md:text-2xl font-extrabold text-[#0059bb] dark:text-blue-400 tracking-tighter font-['Plus_Jakarta_Sans']">Voyager</h1>
+        </div>
+        <nav id="desktop-nav" class="hidden md:flex items-center gap-6 lg:gap-8">
+            <a class="text-gray-600 font-['Plus_Jakarta_Sans'] font-bold text-sm hover:opacity-80 transition-opacity" href="index.html">Explore</a>
+            <a class="text-[#0059bb] font-['Plus_Jakarta_Sans'] font-bold text-sm hover:opacity-80 transition-opacity" href="trip-planner.html">My Trips</a>
+            <a class="text-gray-600 font-['Plus_Jakarta_Sans'] font-bold text-sm hover:opacity-80 transition-opacity" href="finance-planner.html">Finance</a>
+            <a class="text-gray-600 font-['Plus_Jakarta_Sans'] font-bold text-sm hover:opacity-80 transition-opacity" href="profile.html">Profile</a>
+        </nav>
+        <div class="flex items-center gap-2 md:gap-4">
+            <button class="text-on-surface-variant hover:text-on-surface transition-colors p-1 hidden md:block" data-theme-toggle onclick="ThemeManager.toggle()" title="Toggle Dark Mode">
+                <span class="material-symbols-outlined text-sm md:text-base">dark_mode</span>
+            </button>
+            <div class="w-8 md:w-10 h-8 md:h-10 rounded-full overflow-hidden border-2 border-primary-container/20">
+                <img alt="User profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJT82zec8jwfKKI2zqMDB7pAsuv44Q_2jj8W72GF-5U-xIv8A1VqDD7y3nuu4JaxN_i5kOc2NRjQw5I4etHZuAFSiE9GPbsK02O73KgWr9dX-T2mfpc7dC_eDMJmusT6AAg-Ws2O15Qzr4fpR5NtB_mNJkS9rgEiNwnIIn_HKA10h9qr0lgJsLYu7w9xx2MQLS3uW061w8JJrgXiYjh8h6VMUi9ZmCvDWuUFCkAvtXwA2pzUXbZ35ZDe3DQFIAOgExdaATU4Qir1J5"/>
+            </div>
+        </div>
+    </header>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed top-16 left-0 w-full bg-surface-container-lowest border-b border-outline-variant/20 z-40 max-h-0 overflow-hidden transition-all duration-300">
+        <nav class="px-4 py-4 space-y-2">
+            <a class="block text-gray-600 font-['Plus_Jakarta_Sans'] font-bold py-2 px-4 rounded hover:bg-primary/10 transition-colors" href="index.html">Explore</a>
+            <a class="block text-[#0059bb] font-['Plus_Jakarta_Sans'] font-bold py-2 px-4 rounded hover:bg-primary/10 transition-colors" href="trip-planner.html">My Trips</a>
+            <a class="block text-gray-600 font-['Plus_Jakarta_Sans'] font-bold py-2 px-4 rounded hover:bg-primary/10 transition-colors" href="finance-planner.html">Finance</a>
+            <a class="block text-gray-600 font-['Plus_Jakarta_Sans'] font-bold py-2 px-4 rounded hover:bg-primary/10 transition-colors" href="profile.html">Profile</a>
+        </nav>
+    </div>
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            const isOpen = menu.classList.contains('hidden');
+            if (isOpen) {
+                menu.classList.remove('hidden');
+                menu.style.maxHeight = menu.scrollHeight + 'px';
+                btn.textContent = 'close';
+            } else {
+                menu.style.maxHeight = '0';
+                btn.textContent = 'menu';
+                setTimeout(() => menu.classList.add('hidden'), 300);
+            }
+        }
+    </script>
+    <main class="pt-24 pb-32 px-4 md:px-12 max-w-7xl mx-auto">
+        <!-- Hero Section -->
+        <section class="relative mb-16 mt-8">
+            <div class="relative z-10 pl-4 md:pl-12">
+                <span class="font-label text-xs uppercase tracking-[0.2em] text-primary font-bold mb-2 block">Planner</span>
+                <h2 class="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter text-on-surface leading-[0.9]">
+                    Draft Your <br/>
+                    <span class="text-primary-container">Next Escape</span>
+                </h2>
+            </div>
+            <div class="absolute -top-12 right-0 w-2/3 md:w-1/2 h-64 md:h-96 opacity-20 pointer-events-none">
+                <img class="w-full h-full object-cover rounded-xl grayscale" alt="Trip destination scenic view" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyfCNaWss4Etg-jM4AUlqZ7wRIdj5r8LFac1A7YlVPYaajZL3f8HNqHWL1VYJy_Yvlulu8rIBtwsm9OdeJ_OVH4oojk6ylnOkuWOc2bnrHRU0UTUZn----x2uMjHdj4KwP6TRWRyrSptYqKt37Bf5z9cjlxSW2AC1OfKQCDE8s_IW4KCqrOhC2yt9Byzi0ua8m8EI2RGV-9zc05Djju8BHQEeqxuilFQY_ssCi6x8YiuB-WXYTX_iaPWCZbuhPasPO9sBTUIi1KtqO"/>
+            </div>
+        </section>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Trip Logistics Card -->
+            <div class="lg:col-span-5 space-y-6">
+                <div class="bg-surface-container-lowest rounded p-8 editorial-shadow">
+                    <h3 class="font-headline text-xl font-bold mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">route</span>
+                        Itinerary Details
+                    </h3>
+                    <div class="grid grid-cols-2 gap-3 mb-6">
+                        <button onclick="updateSelection(0, 'Fushimi Inari Shrine', 'https://lh3.googleusercontent.com/aida-public/AB6AXuCYVzloqgCcykyGX2ObHcvVb_x66Xk6zE6VLQ-4u5iCTuNMSXPNBvpXQC1k5z5BoymIc16377ed9TvXyz45LN4VARddGgi86hQSeki6nwbbFT63BL_G7uV2oQQLQe9935rCUpVEXL2lJSdJN1f5Hefn2B463eaG35QUJk8JfdL2v5Y1erNvT00Gk-FY7dowI-qzQNVuz6Ml6FTywdijcPLtKohPcggFHXaoRGa5RFabFdsAVH3J9QJDU09ToZ2CpaFNykWGhDmailH3')" class="itinerary-btn active-btn bg-primary text-on-primary font-bold py-3 px-4 rounded-lg text-sm transition-all">
+                            <span class="material-symbols-outlined text-base block mb-1">temple_buddhist</span>
+                            Fushimi Inari
+                        </button>
+                        <button onclick="updateSelection(1, 'Arashiyama Bamboo Grove', 'https://lh3.googleusercontent.com/aida-public/AB6AXuCHHR1QYiXgEBcJFSV6O7rZx8L8FzYKw-5B9K0qV1BhIw2v_kpLZ7Vc6qH8hCvpM9tYP4kU2GxCc8BuS3qXV8zI40fKYfNvIFQ7h2RJ6J8wKtXdkRqW3KJ-WLaLJvePRjnQ2ywPpN5EWi11Y6w4Ss3F9B0Z3xQyObjw8E7QyZNPF0cblAqBgvSrKE6h2X_YfEqIpOCyEw2KQxhN0eJ5')" class="itinerary-btn bg-surface-container-low border border-outline-variant/30 text-on-surface font-bold py-3 px-4 rounded-lg text-sm hover:border-primary/50 transition-all">
+                            <span class="material-symbols-outlined text-base block mb-1">park</span>
+                            Bamboo Grove
+                        </button>
+                        <button onclick="updateSelection(2, 'Fushimi Sake District', 'https://lh3.googleusercontent.com/aida-public/AB6AXuBsSJ8e-4pDl9LfTrU_r-RqFuPo0xYmK_2Nm8L8lCeHnY_l8uJdFdqPyFJKB-_2Ug0P8wvLs5o4mGN7jJ8H-mQg0SBpVZ3Lln0M4qDn7DuKB0pqrR1dZQkCqf8e9McqaGZlG9G5Z_5PkJvFEJw2JmjvZl_cq')" class="itinerary-btn bg-surface-container-low border border-outline-variant/30 text-on-surface font-bold py-3 px-4 rounded-lg text-sm hover:border-primary/50 transition-all">
+                            <span class="material-symbols-outlined text-base block mb-1">local_bar</span>
+                            Sake District
+                        </button>
+                        <button onclick="updateSelection(3, 'Kinkaku-ji Temple', 'https://lh3.googleusercontent.com/aida-public/AB6AXuDkJ7GvNDXeYyVu-fCO8KS8YG7nAELvPxM5r_rHczBiI3tSAf0n2VU8KpKhXI0IhqSh3KPCwpXzVLAP0QYM-mxQYw_w0Yh5F4rELN8WGVo7-hBN_ulyDN3kPKA7Y9D0XJ-3L7vL9_AHKyPHt-Kg')" class="itinerary-btn bg-surface-container-low border border-outline-variant/30 text-on-surface font-bold py-3 px-4 rounded-lg text-sm hover:border-primary/50 transition-all">
+                            <span class="material-symbols-outlined text-base block mb-1">temple_buddhist</span>
+                            Kinkaku-ji
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="relative group">
+                            <label class="absolute -top-2.5 left-4 bg-surface-container-lowest px-1 text-[10px] font-bold text-outline uppercase tracking-wider">Starting Point</label>
+                            <div class="flex items-center gap-3 p-4 rounded-xl bg-surface-container-low focus-within:ring-2 ring-primary-container transition-all">
+                                <span class="material-symbols-outlined text-outline text-sm">location_on</span>
+                                <input id="starting-point" class="bg-transparent border-none p-0 focus:ring-0 w-full font-medium text-on-surface placeholder:text-outline/50" placeholder="From where?" type="text" value="San Francisco, USA" onchange="calculateCosts()" onkeyup="calculateCosts()"/>
+                            </div>
+                        </div>
+                        <div class="flex justify-center -my-2 relative z-10">
+                            <button onclick="swapLocations()" class="bg-primary text-on-primary w-10 h-10 rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+                                <span class="material-symbols-outlined text-sm">swap_vert</span>
+                            </button>
+                        </div>
+                        <div class="relative group">
+                            <label class="absolute -top-2.5 left-4 bg-surface-container-lowest px-1 text-[10px] font-bold text-outline uppercase tracking-wider">Destination</label>
+                            <div class="flex items-center gap-3 p-4 rounded-xl bg-surface-container-low focus-within:ring-2 ring-primary-container transition-all">
+                                <span class="material-symbols-outlined text-secondary text-sm">flight_takeoff</span>
+                                <input id="destination" class="bg-transparent border-none p-0 focus:ring-0 w-full font-medium text-on-surface placeholder:text-outline/50" placeholder="To where?" type="text" value="Kyoto, Japan" onchange="calculateCosts()" onkeyup="calculateCosts()"/>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 pt-2">
+                            <div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/15">
+                                <span class="block text-[10px] font-bold text-outline uppercase mb-1">Departure</span>
+                                <div class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-sm text-primary">calendar_today</span>
+                                    <span class="font-bold text-sm">Oct 14, 2024</span>
+                                </div>
+                            </div>
+                            <div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/15">
+                                <span class="block text-[10px] font-bold text-outline uppercase mb-1">Return</span>
+                                <div class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-sm text-primary">event_repeat</span>
+                                    <span class="font-bold text-sm">Oct 28, 2024</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rounded overflow-hidden aspect-[16/9] relative group">
+                    <img id="selection-image" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Featured destination" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYVzloqgCcykyGX2ObHcvVb_x66Xk6zE6VLQ-4u5iCTuNMSXPNBvpXQC1k5z5BoymIc16377ed9TvXyz45LN4VARddGgi86hQSeki6nwbbFT63BL_G7uV2oQQLQe9935rCUpVEXL2lJSdJN1f5Hefn2B463eaG35QUJk8JfdL2v5Y1erNvT00Gk-FY7dowI-qzQNVuz6Ml6FTywdijcPLtKohPcggFHXaoRGa5RFabFdsAVH3J9QJDU09ToZ2CpaFNykWGhDmailH3"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+                        <div class="text-white">
+                            <p class="text-[10px] font-bold uppercase tracking-widest opacity-80">Current Selection</p>
+                            <h4 id="selection-title" class="text-xl font-bold">The Autumn Spirit of Kyoto</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Cost Breakdown Section -->
+            <div class="lg:col-span-7">
+                <div class="bg-surface-container-low rounded p-8 md:p-10 h-full relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-8 opacity-5">
+                        <span class="material-symbols-outlined text-[120px]">account_balance_wallet</span>
+                    </div>
+                    <header class="mb-8 relative z-10">
+                        <h3 class="font-headline text-2xl font-bold text-on-surface mb-2">Cost Breakdown</h3>
+                        <p class="text-on-surface-variant text-sm max-w-md">Estimated based on current market trends for October travel periods.</p>
+                    </header>
+                    <div class="space-y-6 relative z-10">
+                        <!-- Flights Card -->
+                        <div class="bg-surface-container-lowest p-6 rounded-xl flex items-center justify-between border border-outline-variant/10 hover:border-primary/30 transition-colors">
+                            <div class="flex items-center gap-5">
+                                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                    <span class="material-symbols-outlined">flight</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-on-surface">Round-trip Flights</h4>
+                                    <p id="flight-route" class="text-xs text-on-surface-variant">SFO → KIX (Premium Economy)</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span id="flight-cost" class="block font-headline text-xl font-extrabold text-on-surface">$1,420</span>
+                                <span class="text-[10px] font-bold text-primary uppercase">Estimated</span>
+                            </div>
+                        </div>
+                        <!-- Accommodation -->
+                        <div class="bg-surface-container-lowest p-6 rounded-xl flex items-center justify-between border border-outline-variant/10 hover:border-primary/30 transition-colors">
+                            <div class="flex items-center gap-5">
+                                <div class="w-12 h-12 rounded-full bg-secondary-container/10 flex items-center justify-center text-secondary">
+                                    <span class="material-symbols-outlined">hotel</span>
+                                </div>
+                                <div>
+                                    <h4 id="hotel-title" class="font-bold text-on-surface">Luxury Ryokan &amp; Hotels</h4>
+                                    <p id="hotel-nights" class="text-xs text-on-surface-variant">14 Nights Average</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span id="hotel-cost" class="block font-headline text-xl font-extrabold text-on-surface">$2,850</span>
+                                <span class="text-[10px] font-bold text-secondary uppercase">Premium Stay</span>
+                            </div>
+                        </div>
+                        <!-- Food & Activities -->
+                        <div class="bg-surface-container-lowest p-6 rounded-xl flex items-center justify-between border border-outline-variant/10 hover:border-primary/30 transition-colors">
+                            <div class="flex items-center gap-5">
+                                <div class="w-12 h-12 rounded-full bg-tertiary-container/10 flex items-center justify-center text-tertiary">
+                                    <span class="material-symbols-outlined">restaurant</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-on-surface">Dining &amp; Experiences</h4>
+                                    <p id="dining-budget" class="text-xs text-on-surface-variant">Daily Budget: $150</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span id="dining-cost" class="block font-headline text-xl font-extrabold text-on-surface">$2,100</span>
+                                <span class="text-[10px] font-bold text-tertiary uppercase">All Inclusive</span>
+                            </div>
+                        </div>
+                        <!-- Total Calculation -->
+                        <div class="mt-12 pt-8 border-t border-outline-variant/20">
+                            <div class="flex items-end justify-between mb-8">
+                                <div>
+                                    <p class="font-label text-xs uppercase tracking-widest text-outline font-bold mb-1">Total Estimated Investment</p>
+                                    <h3 id="total-cost" class="font-headline text-5xl font-black text-primary-container">$6,370</h3>
+                                </div>
+                                <div class="hidden md:block bg-primary-fixed p-3 rounded-lg text-on-primary-fixed">
+                                    <p class="text-[10px] font-bold leading-tight">Price Trend:<br/><span class="text-lg">Stable</span></p>
+                                </div>
+                            </div>
+                            <button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold py-6 rounded-full shadow-xl hover:shadow-primary-container/20 transition-all flex items-center justify-center gap-3 active:scale-[0.98]" onclick="window.location.href='finance-planner.html'">
+                                Calculate Savings Goal
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                            </button>
+                            <p class="text-center mt-4 text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">Proceed to finance planner and set your target</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- BottomNavBar -->
+    <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#f8f9fa]/80 dark:bg-gray-900/80 backdrop-blur-xl border-t border-[#c1c6d7]/15 shadow-[0_-4px_24px_rgba(25,28,29,0.06)] rounded-t-[2rem]">
+        <a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 px-4 py-2 hover:bg-gray-200/50" data-nav-link="index.html" href="index.html">
+            <span class="material-symbols-outlined">explore</span>
+            <span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-[0.05em]">Explore</span>
+        </a>
+        <a class="flex flex-col items-center justify-center bg-[#0070ea]/10 text-[#0059bb] dark:text-blue-300 rounded-2xl px-4 py-2 active" data-nav-link="trip-planner.html" href="trip-planner.html">
+            <span class="material-symbols-outlined">map</span>
+            <span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-[0.05em]">My Trips</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 px-4 py-2 hover:bg-gray-200/50" data-nav-link="finance-planner.html" href="finance-planner.html">
+            <span class="material-symbols-outlined">payments</span>
+            <span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-[0.05em]">Finance</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 px-4 py-2 hover:bg-gray-200/50" data-nav-link="profile.html" href="profile.html">
+            <span class="material-symbols-outlined">person</span>
+            <span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-[0.05em]">Profile</span>
+        </a>
+    </nav>
+    <aside class="hidden lg:flex fixed left-0 top-0 h-full w-20 flex-col items-center py-8 bg-surface-container-low border-r border-outline-variant/10 z-40">
+        <div class="mb-12">
+            <span class="material-symbols-outlined text-primary text-3xl">navigation</span>
+        </div>
+        <div class="space-y-10 flex flex-col items-center">
+            <a data-nav-link="index.html" href="index.html" class="text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined">explore</span></a>
+            <a data-nav-link="trip-planner.html" href="trip-planner.html" class="text-primary"><span class="material-symbols-outlined material-symbols-filled">map</span></a>
+            <a data-nav-link="finance-planner.html" href="finance-planner.html" class="text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined">payments</span></a>
+            <a data-nav-link="profile.html" href="profile.html" class="text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined">person</span></a>
+        </div>
+    </aside>
+    <script>
+        // Destination itinerary data
+        const destinationData = {
+            'kyoto': {
+                name: 'Kyoto, Japan',
+                destinations: [
+                    { index: 0, name: 'Fushimi Inari Shrine', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCYVzloqgCcykyGX2ObHcvVb_x66Xk6zE6VLQ-4u5iCTuNMSXPNBvpXQC1k5z5BoymIc16377ed9TvXyz45LN4VARddGgi86hQSeki6nwbbFT63BL_G7uV2oQQLQe9935rCUpVEXL2lJSdJN1f5Hefn2B463eaG35QUJk8JfdL2v5Y1erNvT00Gk-FY7dowI-qzQNVuz6Ml6FTywdijcPLtKohPcggFHXaoRGa5RFabFdsAVH3J9QJDU09ToZ2CpaFNykWGhDmailH3' },
+                    { index: 1, name: 'Arashiyama Bamboo Grove', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCHHR1QYiXgEBcJFSV6O7rZx8L8FzYKw-5B9K0qV1BhIw2v_kpLZ7Vc6qH8hCvpM9tYP4kU2GxCc8BuS3qXV8zI40fKYfNvIFQ7h2RJ6J8wKtXdkRqW3KJ-WLaLJvePRjnQ2ywPpN5EWi11Y6w4Ss3F9B0Z3xQyObjw8E7QyZNPF0cblAqBgvSrKE6h2X_YfEqIpOCyEw2KQxhN0eJ5' },
+                    { index: 2, name: 'Fushimi Sake District', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBsSJ8e-4pDl9LfTrU_r-RqFuPo0xYmK_2Nm8L8lCeHnY_l8uJdFdqPyFJKB-_2Ug0P8wvLs5o4mGN7jJ8H-mQg0SBpVZ3Lln0M4qDn7DuKB0pqrR1dZQkCqf8e9McqaGZlG9G5Z_5PkJvFEJw2JmjvZl_cq' },
+                    { index: 3, name: 'Kinkaku-ji Temple', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDkJ7GvNDXeYyVu-fCO8KS8YG7nAELvPxM5r_rHczBiI3tSAf0n2VU8KpKhXI0IhqSh3KPCwpXzVLAP0QYM-mxQYw_w0Yh5F4rELN8WGVo7-hBN_ulyDN3kPKA7Y9D0XJ-3L7vL9_AHKyPHt-Kg' }
+                ]
+            },
+            'tokyo': {
+                name: 'Tokyo, Japan',
+                destinations: [
+                    { index: 0, name: 'Shibuya Crossing', image: 'https://images.unsplash.com/photo-1540080306560-daa25f2f6f85?w=800' },
+                    { index: 1, name: 'Senso-ji Temple', image: 'https://images.unsplash.com/photo-1522383150241-a8535e3b0d65?w=800' },
+                    { index: 2, name: 'TeamLab Borderless', image: 'https://images.unsplash.com/photo-1513161455079-7ef1a826e90c?w=800' },
+                    { index: 3, name: 'Meiji Shrine', image: 'https://images.unsplash.com/photo-1522970879917-84611e6e8629?w=800' }
+                ]
+            },
+            'bangkok': {
+                name: 'Bangkok, Thailand',
+                destinations: [
+                    { index: 0, name: 'Grand Palace', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800' },
+                    { index: 1, name: 'Wat Arun Temple', image: 'https://images.unsplash.com/photo-1527004760902-ca1d9c2df92b?w=800' },
+                    { index: 2, name: 'Chao Phraya River Cruise', image: 'https://images.unsplash.com/photo-1504681869696-d977212a34ad?w=800' },
+                    { index: 3, name: 'Floating Markets', image: 'https://images.unsplash.com/photo-1537394474596-e4e08cbcd81f?w=800' }
+                ]
+            },
+            'paris': {
+                name: 'Paris, France',
+                destinations: [
+                    { index: 0, name: 'Eiffel Tower', image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800' },
+                    { index: 1, name: 'Louvre Museum', image: 'https://images.unsplash.com/photo-1557382035-86a3cc2666cd?w=800' },
+                    { index: 2, name: 'Arc de Triomphe', image: 'https://images.unsplash.com/photo-1537422018464-fbbfc65d7990?w=800' },
+                    { index: 3, name: 'Versailles Palace', image: 'https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=800' }
+                ]
+            },
+            'santorini': {
+                name: 'Santorini, Greece',
+                destinations: [
+                    { index: 0, name: 'Oia Village', image: 'https://images.unsplash.com/photo-1483729558449-99daa64bbb5e?w=800' },
+                    { index: 1, name: 'Red Beach', image: 'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=800' },
+                    { index: 2, name: 'Akrotiri Ruins', image: 'https://images.unsplash.com/photo-1511379938547-c1f69b13d835?w=800' },
+                    { index: 3, name: 'Caldera Sunset', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800' }
+                ]
+            }
+        };
+
+        // Destination cost data
+        const destinationCosts = {
+            'kyoto': { hotel: 200, dining: 150, description: 'Luxury Ryokan & Hotels' },
+            'tokyo': { hotel: 220, dining: 170, description: 'Premium Hotels & Restaurants' },
+            'bangkok': { hotel: 120, dining: 80, description: 'Luxury Hotels & Dining' },
+            'paris': { hotel: 250, dining: 200, description: 'Luxury Hotels & Fine Dining' },
+            'bali': { hotel: 100, dining: 60, description: 'Luxury Resorts & Dining' },
+            'new york': { hotel: 280, dining: 220, description: 'Premium Hotels & Fine Dining' },
+            'london': { hotel: 260, dining: 210, description: 'Luxury Hotels & Restaurants' },
+            'sydney': { hotel: 180, dining: 140, description: 'Luxury Hotels & Dining' },
+            'dubai': { hotel: 200, dining: 180, description: 'Luxury Hotels & Fine Dining' },
+            'amsterdam': { hotel: 200, dining: 160, description: 'Boutique Hotels & Restaurants' },
+            'santorini': { hotel: 280, dining: 200, description: 'Luxury Resorts & Dining' },
+            'amalfi coast': { hotel: 260, dining: 190, description: 'Premium Hotels & Fine Dining' }
+        };
+
+        // Flight distances and base costs
+        const flightCosts = {
+            'san francisco': {
+                'kyoto': 1420, 'tokyo': 1180, 'bangkok': 1280, 'paris': 980, 'bali': 1050,
+                'new york': 550, 'london': 820, 'sydney': 1320, 'dubai': 950, 'amsterdam': 1020,
+                'santorini': 1100, 'amalfi coast': 1080
+            },
+            'new york': {
+                'kyoto': 1560, 'tokyo': 1320, 'bangkok': 1420, 'paris': 600, 'bali': 1450,
+                'london': 560, 'sydney': 1680, 'dubai': 1080, 'amsterdam': 720, 'santorini': 850, 'amalfi coast': 780
+            },
+            'london': {
+                'kyoto': 1680, 'tokyo': 1440, 'bangkok': 1180, 'paris': 280, 'bali': 1380,
+                'new york': 560, 'sydney': 1780, 'dubai': 620, 'amsterdam': 320, 'santorini': 420, 'amalfi coast': 380
+            },
+            'paris': {
+                'kyoto': 1620, 'tokyo': 1380, 'bangkok': 1120, 'london': 280, 'bali': 1420,
+                'new york': 600, 'sydney': 1820, 'dubai': 680, 'amsterdam': 320, 'santorini': 380, 'amalfi coast': 420
+            },
+            'sydney': {
+                'kyoto': 1320, 'tokyo': 1080, 'bangkok': 680, 'paris': 1820, 'bali': 420,
+                'new york': 1680, 'london': 1780, 'dubai': 1480, 'amsterdam': 1920, 'santorini': 1980, 'amalfi coast': 2020
+            },
+            'bangkok': {
+                'kyoto': 980, 'tokyo': 740, 'paris': 1120, 'bali': 320, 'new york': 1420,
+                'london': 1180, 'sydney': 680, 'dubai': 880, 'amsterdam': 1280, 'santorini': 1380, 'amalfi coast': 1420
+            },
+            'bali': {
+                'kyoto': 1050, 'tokyo': 810, 'bangkok': 320, 'paris': 1420, 'new york': 1450,
+                'london': 1380, 'sydney': 420, 'dubai': 950, 'amsterdam': 1520, 'santorini': 1620, 'amalfi coast': 1680
+            },
+            'dubai': {
+                'kyoto': 1180, 'tokyo': 940, 'bangkok': 880, 'paris': 680, 'bali': 950,
+                'new york': 1080, 'london': 620, 'sydney': 1480, 'amsterdam': 780, 'santorini': 520, 'amalfi coast': 580
+            },
+            'tokyo': {
+                'kyoto': 320, 'bangkok': 740, 'paris': 1380, 'bali': 810, 'new york': 1320,
+                'london': 1440, 'sydney': 1080, 'dubai': 940, 'amsterdam': 1580, 'santorini': 1650, 'amalfi coast': 1680
+            },
+            'amsterdam': {
+                'kyoto': 1680, 'tokyo': 1580, 'bangkok': 1280, 'paris': 320, 'bali': 1520,
+                'new york': 720, 'london': 320, 'sydney': 1920, 'dubai': 780, 'santorini': 480, 'amalfi coast': 520
+            },
+            'santorini': {
+                'kyoto': 1750, 'tokyo': 1650, 'bangkok': 1380, 'new york': 850, 'paris': 380,
+                'london': 420, 'sydney': 1980, 'dubai': 520, 'amsterdam': 480, 'bali': 1620
+            },
+            'amalfi': {
+                'kyoto': 1680, 'tokyo': 1680, 'bangkok': 1420, 'new york': 780, 'paris': 420,
+                'london': 380, 'sydney': 2020, 'dubai': 580, 'amsterdam': 520, 'bali': 1680
+            }
+        };
+
+        // Calculate flight cost between two cities
+        function getFlightCost(origin, destination) {
+            const originKey = origin.toLowerCase().split(',')[0].trim();
+            const destKey = destination.toLowerCase().split(',')[0].trim();
+            
+            if (flightCosts[originKey] && flightCosts[originKey][destKey]) {
+                return flightCosts[originKey][destKey];
+            }
+            return 1200; // Default flight cost
+        }
+
+        // Get destination details
+        function getDestinationDetails(destination) {
+            const destKey = destination.toLowerCase().split(',')[0].trim();
+            return destinationCosts[destKey] || { hotel: 200, dining: 150, description: 'Luxury Hotels & Dining' };
+        }
+
+        // Calculate and update costs
+        function calculateCosts() {
+            const origin = document.getElementById('starting-point').value;
+            const destination = document.getElementById('destination').value;
+            
+            if (!origin || !destination) return;
+
+            // Get flight cost
+            const flightCost = getFlightCost(origin, destination);
+            
+            // Get destination details
+            const destDetails = getDestinationDetails(destination);
+            const hotelPerNight = destDetails.hotel;
+            const diningPerDay = destDetails.dining;
+            const nights = 14;
+            const days = nights;
+
+            // Calculate costs
+            const hotelCost = hotelPerNight * nights;
+            const diningCost = diningPerDay * days;
+            const totalCost = flightCost + hotelCost + diningCost;
+
+            // Update display
+            document.getElementById('flight-cost').textContent = '$' + flightCost.toLocaleString();
+            document.getElementById('flight-route').textContent = origin.split(',')[0] + ' → ' + destination.split(',')[0] + ' (Premium Economy)';
+            
+            document.getElementById('hotel-cost').textContent = '$' + hotelCost.toLocaleString();
+            document.getElementById('hotel-title').textContent = destDetails.description;
+            document.getElementById('hotel-nights').textContent = nights + ' Nights Average';
+            
+            document.getElementById('dining-cost').textContent = '$' + diningCost.toLocaleString();
+            document.getElementById('dining-budget').textContent = 'Daily Budget: $' + diningPerDay;
+            
+            document.getElementById('total-cost').textContent = '$' + totalCost.toLocaleString();
+        }
+
+        // Swap starting point and destination
+        function swapLocations() {
+            const originInput = document.getElementById('starting-point');
+            const destInput = document.getElementById('destination');
+            const temp = originInput.value;
+            originInput.value = destInput.value;
+            destInput.value = temp;
+            calculateCosts();
+        }
+
+        // Update selection when itinerary button is clicked
+        function updateSelection(index, title, imageUrl) {
+            // Update image and title
+            document.getElementById('selection-image').src = imageUrl;
+            document.getElementById('selection-title').textContent = title;
+            
+            // Update button active states
+            const buttons = document.querySelectorAll('.itinerary-btn');
+            buttons.forEach((btn, idx) => {
+                if (idx === index) {
+                    btn.classList.remove('bg-surface-container-low', 'border', 'border-outline-variant/30', 'text-on-surface', 'hover:border-primary/50');
+                    btn.classList.add('active-btn', 'bg-primary', 'text-on-primary');
+                } else {
+                    btn.classList.remove('active-btn', 'bg-primary', 'text-on-primary');
+                    btn.classList.add('bg-surface-container-low', 'border', 'border-outline-variant/30', 'text-on-surface', 'hover:border-primary/50');
+                }
+            });
+        }
+
+        // Load selected destination from localStorage
+        function loadSelectedDestination() {
+            const selected = localStorage.getItem('selectedDestination');
+            if (selected) {
+                const destination = JSON.parse(selected);
+                
+                // Set destination input
+                document.getElementById('destination').value = destination.location;
+                
+                // Update selection image and title
+                document.getElementById('selection-image').src = destination.image;
+                document.getElementById('selection-title').textContent = destination.name;
+                
+                // Update itinerary buttons based on destination
+                const destKey = destination.location.toLowerCase().split(',')[0].trim();
+                if (destinationData[destKey]) {
+                    const destInfo = destinationData[destKey];
+                    const buttons = document.querySelectorAll('.itinerary-btn');
+                    buttons.forEach((btn, idx) => {
+                        if (idx < destInfo.destinations.length) {
+                            const dest = destInfo.destinations[idx];
+                            btn.onclick = () => updateSelection(idx, dest.name, dest.image);
+                            // Update text in button
+                            const spans = btn.querySelectorAll('span');
+                            if (spans.length > 1) {
+                                spans[spans.length - 1].textContent = dest.name;
+                            }
+                        }
+                    });
+                    
+                    // Set the first destination as selected
+                    updateSelection(0, destInfo.destinations[0].name, destInfo.destinations[0].image);
+                }
+                
+                // Trigger cost calculation
+                setTimeout(() => calculateCosts(), 100);
+                
+                // Clear localStorage after loading
+                localStorage.removeItem('selectedDestination');
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSelectedDestination();
+            calculateCosts();
+        });
+    </script>
+    <script src="js/navigation.js"></script>
+</body>
+</html>

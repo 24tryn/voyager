@@ -1,0 +1,72 @@
+/* Shared Styles for Voyager */
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.material-symbols-filled {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.editorial-shadow {
+  box-shadow: 0 24px 48px -12px rgba(25, 28, 29, 0.08);
+}
+
+.glass-nav {
+  background: rgba(248, 249, 250, 0.8);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+.dark .glass-nav {
+  background: rgba(17, 24, 39, 0.8);
+}
+
+.hero-gradient {
+  background: linear-gradient(to bottom, rgba(25, 28, 29, 0) 0%, rgba(25, 28, 29, 0.4) 60%, rgba(248, 249, 250, 1) 100%);
+}
+
+.dark .hero-gradient {
+  background: linear-gradient(to bottom, rgba(25, 28, 29, 0) 0%, rgba(25, 28, 29, 0.6) 60%, rgba(17, 24, 39, 1) 100%);
+}
+
+.text-overlap {
+  text-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+body {
+  min-height: max(884px, 100dvh);
+}
+
+/* Smooth transitions */
+a, button {
+  transition: all 0.2s ease;
+}
+
+/* Utility classes */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+}
+
+/* Active navigation states */
+nav a.active,
+nav button.active {
+  background: rgba(0, 112, 234, 0.1);
+  color: #0059bb;
+}
+
+.dark nav a.active,
+.dark nav button.active {
+  background: rgba(59, 130, 246, 0.1);
+  color: #60a5fa;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 80px;
+  }
+}

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+    <title>API Configuration - Voyager</title>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen font-['Be_Vietnam_Pro']">
+    <div class="container mx-auto px-3 md:px-4 py-8 md:py-12 max-w-2xl">
+        <!-- Header -->
+        <div class="text-center mb-8 md:mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">🗺️ Voyager API Setup</h1>
+            <p class="text-sm md:text-base text-gray-600">Configure Mapbox to unlock dynamic attractions and routing features</p>
+        </div>
+
+        <!-- Setup Steps -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 space-y-6 md:space-y-8">
+            <!-- Mapbox Configuration (Primary) -->
+            <div class="border-b pb-6 md:pb-8 bg-gradient-to-br from-purple-50 to-transparent rounded-lg p-4 -m-4 mb-0">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="bg-gradient-to-br from-purple-500 to-purple-600 text-white px-3 py-1 rounded-full text-sm font-semibold">PRIMARY</span>
+                </div>
+                <h2 class="text-xl md:text-2xl font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                    <span class="text-2xl">📍</span>
+                    Mapbox Configuration
+                </h2>
+                
+                <p class="text-gray-700 mb-4 text-sm">
+                    Get your token from <a href="https://account.mapbox.com/tokens/" target="_blank" rel="noopener" class="text-purple-600 hover:underline font-semibold">Mapbox Account</a>.
+                    Mapbox powers attractions discovery, geocoding, directions, and interactive maps for Voyager.
+                </p>
+
+                <div class="bg-purple-100 border border-purple-300 rounded-lg p-4 mb-4">
+                    <h3 class="font-semibold text-purple-900 mb-2">📝 Steps:</h3>
+                    <ol class="text-sm text-purple-900 space-y-1 list-decimal list-inside">
+                        <li>Go to <a href="https://account.mapbox.com/tokens/" target="_blank" rel="noopener" class="text-purple-700 underline">Mapbox Account Tokens page</a></li>
+                        <li>Create a new token with access to all public scopes</li>
+                        <li>Default public token is perfect for development</li>
+                        <li>Copy the token and paste below</li>
+                    </ol>
+                </div>
+
+                <input 
+                    type="password" 
+                    id="mapbox-token" 
+                    placeholder="Paste your Mapbox Token here (pk.eyJ...)" 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent mb-3"
+                >
+                <button onclick="saveMapboxToken()" class="w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white px-4 py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-purple-800 transition-all">
+                    Save Mapbox Token ✓
+                </button>
+            </div>
+
+            <!-- Google APIs Configuration (Optional) -->
+            <div class="border-b pb-6 md:pb-8 border-gray-200 opacity-75 hover:opacity-100 transition-opacity">
+                <details class="cursor-pointer">
+                    <summary class="text-xl md:text-2xl font-semibold text-gray-900 mb-2 flex items-center gap-2 select-none">
+                        <span class="text-2xl">🔵</span>
+                        <span>Optional: Google APIs Configuration</span>
+                    </summary>
+                    <div class="mt-4 space-y-3">
+                        <p class="text-gray-600 text-sm">
+                            Google APIs is optional and can be used alongside Mapbox for additional features.
+                            Get your API keys from <a href="https://console.cloud.google.com/" target="_blank" rel="noopener" class="text-blue-600 hover:underline">Google Cloud Console</a>.
+                        </p>
+
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                            <h3 class="font-semibold text-blue-900 mb-2">📝 Steps:</h3>
+                            <ol class="text-sm text-blue-800 space-y-1 list-decimal list-inside">
+                                <li>Go to Google Cloud Console</li>
+                                <li>Create a new project</li>
+                                <li>Enable Places API, Maps JavaScript API, Directions API</li>
+                                <li>Create an API key</li>
+                                <li>Paste your key below</li>
+                            </ol>
+                        </div>
+
+                        <input 
+                            type="password" 
+                            id="google-api-key" 
+                            placeholder="Paste your Google API Key here..." 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        >
+                        <button onclick="saveGoogleApiKey()" class="w-full bg-blue-600 text-white px-4 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all">
+                            Save Google API Key (Optional)
+                        </button>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Status -->
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="font-semibold text-gray-900 mb-4">Configuration Status</h3>
+                <div class="space-y-3" id="status-list">
+                    <!-- Status will be populated here -->
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="grid md:grid-cols-2 gap-4">
+                <button onclick="testConfiguration()" class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-all flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    Test Configuration
+                </button>
+                <button onclick="goToApp()" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                    Go to App
+                </button>
+            </div>
+
+            <!-- Skip Option -->
+            <div class="text-center">
+                <p class="text-gray-600 text-sm mb-3">Don't have API keys yet? You can still explore with:</p>
+                <button onclick="goToApp()" class="text-blue-600 hover:underline font-semibold">
+                    Use Demo Mode (Static Attractions) →
+                </button>
+            </div>
+
+            <!-- Resources & Documentation -->
+            <div class="grid md:grid-cols-2 gap-4">
+                <a href="https://docs.mapbox.com/api/" target="_blank" rel="noopener" class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-6 hover:shadow-lg transition-all border border-purple-300">
+                    <h3 class="font-semibold text-gray-900 mb-2">📍 Mapbox Documentation</h3>
+                    <p class="text-sm text-gray-600 mb-3">Explore Mapbox APIs for geocoding, directions, and mapping</p>
+                    <span class="text-purple-600 hover:underline font-semibold">Learn more →</span>
+                </a>
+
+                <a href="https://developers.google.com/maps/documentation/places/web-service" target="_blank" rel="noopener" class="bg-white rounded-lg p-6 hover:shadow-lg transition-all border border-gray-200">
+                    <h3 class="font-semibold text-gray-900 mb-2">🔵 Google Places API (Optional)</h3>
+                    <p class="text-sm text-gray-600 mb-3">Additional attractions and places features</p>
+                    <span class="text-blue-600 hover:underline font-semibold">Learn more →</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api-config.js"></script>
+    <script>
+        /**
+         * Save Google API Key
+         */
+        function saveGoogleApiKey() {
+            const key = document.getElementById('google-api-key').value.trim();
+            if (!key) {
+                alert('Please enter a valid API key');
+                return;
+            }
+
+            APIConfig.setGoogleApiKey(key);
+            alert('✅ Google API Key saved successfully!');
+            updateStatus();
+        }
+
+        /**
+         * Save Mapbox Token
+         */
+        function saveMapboxToken() {
+            const token = document.getElementById('mapbox-token').value.trim();
+            if (!token) {
+                alert('Please enter a valid token');
+                return;
+            }
+
+            APIConfig.setMapboxToken(token);
+            alert('✅ Mapbox Token saved successfully!');
+            updateStatus();
+        }
+
+        /**
+         * Update configuration status
+         */
+        function updateStatus() {
+            const statusList = document.getElementById('status-list');
+            statusList.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined ${APIConfig.google.isConfigured() ? 'text-green-600' : 'text-gray-400'}">
+                        ${APIConfig.google.isConfigured() ? 'check_circle' : 'radio_button_unchecked'}
+                    </span>
+                    <div>
+                        <p class="font-semibold text-gray-900">Google APIs</p>
+                        <p class="text-sm text-gray-600">${APIConfig.google.isConfigured() ? '✅ Configured' : '❌ Not configured'}</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined ${APIConfig.mapbox.isConfigured() ? 'text-green-600' : 'text-gray-400'}">
+                        ${APIConfig.mapbox.isConfigured() ? 'check_circle' : 'radio_button_unchecked'}
+                    </span>
+                    <div>
+                        <p class="font-semibold text-gray-900">Mapbox</p>
+                        <p class="text-sm text-gray-600">${APIConfig.mapbox.isConfigured() ? '✅ Configured' : '❌ Not configured'}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        /**
+         * Test API configuration
+         */
+        async function testConfiguration() {
+            const primaryApi = APIConfig.getPrimaryApi();
+            
+            if (!primaryApi) {
+                alert('⚠️ No APIs configured. Please add at least one API key.');
+                return;
+            }
+
+            alert(`✅ Using ${primaryApi.toUpperCase()} as primary API\n\n` +
+                  `${APIConfig.mapbox.isConfigured() ? '✅ Mapbox configured as fallback' : '❌ Mapbox not configured'}`);
+        }
+
+        /**
+         * Navigate to main app
+         */
+        function goToApp() {
+            window.location.href = 'index.html';
+        }
+
+        // Update status on page load
+        window.addEventListener('load', updateStatus);
+    </script>
+</body>
+</html>

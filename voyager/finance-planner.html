@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Voyager | Trip Finance Planner</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="css/shared.css" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-container": "#fffbff",
+                        "on-secondary-fixed-variant": "#763300",
+                        "secondary-container": "#fc8a40",
+                        "tertiary-container": "#9c6b00",
+                        "on-primary-fixed-variant": "#004493",
+                        "outline": "#717786",
+                        "surface-container-high": "#e7e8e9",
+                        "inverse-surface": "#2e3132",
+                        "secondary-fixed": "#ffdbc9",
+                        "primary-fixed": "#d8e2ff",
+                        "secondary-fixed-dim": "#ffb68d",
+                        "surface-variant": "#e1e3e4",
+                        "on-primary-fixed": "#001a41",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#edeeef",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#005bc0",
+                        "on-background": "#191c1d",
+                        "tertiary-fixed": "#ffdead",
+                        "surface-dim": "#d9dadb",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "inverse-primary": "#adc7ff",
+                        "on-secondary-container": "#672c00",
+                        "primary-container": "#0070ea",
+                        "surface-bright": "#f8f9fa",
+                        "on-tertiary-fixed-variant": "#604100",
+                        "surface": "#f8f9fa",
+                        "outline-variant": "#c1c6d7",
+                        "on-surface-variant": "#414754",
+                        "tertiary-fixed-dim": "#ffba3c",
+                        "primary": "#0059bb",
+                        "on-secondary-fixed": "#331200",
+                        "primary-fixed-dim": "#adc7ff",
+                        "surface-container-low": "#f3f4f5",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#281900",
+                        "on-primary-container": "#fefcff",
+                        "on-surface": "#191c1d",
+                        "tertiary": "#7c5400",
+                        "background": "#f8f9fa",
+                        "error-container": "#ffdad6",
+                        "secondary": "#9b4500"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Be Vietnam Pro"],
+                        "label": ["Be Vietnam Pro"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+    <!-- TopAppBar -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-[#f8f9fa] dark:bg-gray-900 flex justify-between items-center px-4 md:px-6 py-4 border-b border-outline-variant/10">
+        <div class="flex items-center gap-2 md:gap-4">
+            <button id="mobile-menu-btn" class="md:hidden text-[#0059bb] dark:text-blue-400 hover:opacity-80 transition-opacity active:scale-95 duration-200" onclick="toggleMobileMenu()">
+                <span class="material-symbols-outlined text-xl md:text-2xl">menu</span>
+            </button>
+            <h1 class="text-xl md:text-2xl font-extrabold text-[#0059bb] dark:text-blue-400 tracking-tighter font-['Plus_Jakarta_Sans']">Voyager</h1>
+        </div>
+        <div class="flex items-center gap-4 md:gap-6">
+            <nav id="desktop-nav" class="hidden md:flex items-center gap-6 lg:gap-8 font-['Be_Vietnam_Pro'] text-xs lg:text-sm uppercase tracking-[0.05em]">
+                <a class="text-gray-500 hover:opacity-80" href="index.html">Explore</a>
+                <a class="text-gray-500 hover:opacity-80" href="trip-planner.html">My Trips</a>
+                <a class="text-[#0059bb] font-bold" href="finance-planner.html">Finance</a>
+                <a class="text-gray-500 hover:opacity-80" href="profile.html">Profile</a>
+            </nav>
+            <div class="w-8 md:w-10 h-8 md:h-10 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant/15">
+                <img alt="User profile avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEyCdeK08qOCwKBqI4W4NKvINBExfG0rvyiQ9ygk5EtrYRhGuTPZ09vfZGH2HqnOYePfor75WY1bP_PABNzwyXp-VIFNy0MOcOAya_oQCUQHchHgUJU3FQiIvovxdHmJwvM-S7nhnDhuqE6PTLjF6XyfF0o43wzyva3XPQyJeM3xjSkrn9dV9xJkToBLduXeoEIMkngYyaC0W0AidB6WNBJ0dzQTIl1Sl8NXqjgdt6jbE6zNtCV1Orv4vT_8O-9UxijlWveczy65Hd"/>
+            </div>
+        </div>
+    </header>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed top-16 left-0 w-full bg-surface-container-lowest border-b border-outline-variant/20 z-40 max-h-0 overflow-hidden transition-all duration-300">
+        <nav class="px-4 py-4 space-y-2">
+            <a class="block text-gray-600 font-['Plus_Jakarta_Sans'] font-bold py-2 px-4 rounded hover:bg-primary/10 transition-colors" href="index.html">Explore</a>
+            <a class="block text-gray-600 font-['Plus_Jakarta_Sans'] font-bold py-2 px-4 rounded hover:bg-primary/10 transition-colors" href="trip-planner.html">My Trips</a>
+            <a class="block text-[#0059bb] font-['Plus_Jakarta_Sans'] font-bold py-2 px-4 rounded hover:bg-primary/10 transition-colors" href="finance-planner.html">Finance</a>
+            <a class="block text-gray-600 font-['Plus_Jakarta_Sans'] font-bold py-2 px-4 rounded hover:bg-primary/10 transition-colors" href="profile.html">Profile</a>
+        </nav>
+    </div>
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            const isOpen = menu.classList.contains('hidden');
+            if (isOpen) {
+                menu.classList.remove('hidden');
+                menu.style.maxHeight = menu.scrollHeight + 'px';
+                btn.innerHTML = '<span class="material-symbols-outlined">close</span>';
+            } else {
+                menu.style.maxHeight = '0';
+                btn.innerHTML = '<span class="material-symbols-outlined">menu</span>';
+                setTimeout(() => menu.classList.add('hidden'), 300);
+            }
+        }
+    </script>
+    <main class="pt-24 pb-32 px-6 max-w-7xl mx-auto">
+        <!-- Hero Editorial Section -->
+        <section class="relative mb-12">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div class="relative z-10">
+                    <span class="font-label text-secondary font-bold tracking-widest text-xs uppercase mb-2 block">Your Financial Journey</span>
+                    <h2 class="font-headline text-5xl md:text-7xl font-extrabold text-on-background tracking-tighter leading-none">
+                        Dream <br/><span class="text-primary italic">Smarter.</span>
+                    </h2>
+                </div>
+                <div class="md:text-right">
+                    <p class="max-w-xs text-on-surface-variant text-sm font-medium leading-relaxed">
+                        Precision planning for your next escape to the Amalfi Coast. Every cent saved brings the horizon closer.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!-- Bento Finance Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+            <!-- Summary Card -->
+            <div class="md:col-span-4 bg-surface-container-lowest editorial-shadow p-8 rounded-lg flex flex-col justify-between min-h-[400px]">
+                <div>
+                    <div class="flex items-center justify-between mb-8">
+                        <span class="material-symbols-outlined text-primary text-3xl" data-icon="account_balance_wallet">account_balance_wallet</span>
+                        <span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold">ACTIVE TRIP</span>
+                    </div>
+                    <h3 class="font-headline text-xl font-bold mb-1">Amalfi Dream</h3>
+                    <p class="text-on-surface-variant text-xs font-medium uppercase tracking-wider mb-6">Total Trip Cost</p>
+                    <p class="text-4xl font-headline font-extrabold text-on-background tracking-tight">$8,450.00</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-end border-b border-outline-variant/15 pb-2">
+                        <span class="text-xs text-on-surface-variant font-medium">Flights</span>
+                        <span class="text-sm font-bold">$1,200</span>
+                    </div>
+                    <div class="flex justify-between items-end border-b border-outline-variant/15 pb-2">
+                        <span class="text-xs text-on-surface-variant font-medium">Stays</span>
+                        <span class="text-sm font-bold">$4,500</span>
+                    </div>
+                    <div class="flex justify-between items-end border-b border-outline-variant/15 pb-2">
+                        <span class="text-xs text-on-surface-variant font-medium">Activities</span>
+                        <span class="text-sm font-bold">$2,750</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Savings Calculator -->
+            <div class="md:col-span-8 bg-surface-container-low p-8 rounded-lg grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="flex flex-col justify-center">
+                    <h3 class="font-headline text-2xl font-bold mb-6">Financial Inputs</h3>
+                    <form class="space-y-6">
+                        <div class="space-y-2">
+                            <label class="font-label text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Departure Date</label>
+                            <input class="w-full bg-surface-container-lowest border-0 rounded px-4 py-3 font-body text-sm focus:ring-2 focus:ring-primary" type="date" aria-label="Trip start date" value="2024-09-15"/>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="font-label text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Current Savings</label>
+                            <div class="relative">
+                                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-bold">$</span>
+                                <input class="w-full bg-surface-container-lowest border-0 rounded pl-8 pr-4 py-3 font-body text-sm focus:ring-2 focus:ring-primary" placeholder="2,500" type="number"/>
+                            </div>
+                        </div>
+                        <div class="pt-4">
+                            <button type="submit" class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary py-4 rounded-full font-bold text-sm tracking-wide shadow-lg hover:opacity-90 transition-all">
+                                Recalculate Goal
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="bg-surface-container-lowest rounded-lg p-8 flex flex-col items-center justify-center text-center relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-full -mr-16 -mt-16"></div>
+                    <div class="relative w-48 h-48 mb-6 flex items-center justify-center">
+                        <svg class="w-full h-full transform -rotate-90">
+                            <circle class="text-surface-container-highest" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-width="8"></circle>
+                            <circle class="text-primary" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-dasharray="552.92" stroke-dashoffset="380" stroke-linecap="round" stroke-width="12"></circle>
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span class="text-3xl font-headline font-extrabold">31%</span>
+                            <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter">Saved</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-on-surface-variant font-medium mb-1 uppercase tracking-widest">Monthly Goal</p>
+                    <p class="text-3xl font-headline font-extrabold text-primary">$850.00</p>
+                    <p class="text-[10px] text-on-surface-variant mt-2 italic">7 months remaining until departure</p>
+                </div>
+            </div>
+            <!-- Savings Accelerators -->
+            <div class="md:col-span-12 mt-4">
+                <h4 class="font-headline text-2xl font-bold mb-8 flex items-center gap-3">
+                    <span class="material-symbols-outlined material-symbols-filled text-tertiary">auto_awesome</span>
+                    Save Faster Strategies
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Strategy Card 1 -->
+                    <div class="group relative overflow-hidden rounded-lg bg-surface-container-lowest editorial-shadow">
+                        <div class="h-40 overflow-hidden">
+                            <img alt="Strategy image" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBySjeJ0URSNdhqvR-9UiGR0Sd1UJskbvqLT06VsMnWrvpTlcnXf-OYMysB3G06vxvcX2DTD6dzjTASrhx8UqOz5KJt14h6gOkLZj98T-YqaYdkws8FjvYxX589FM8BNwMdWpw3rNjC3bvo_es9azn5xyURP_daRWrCEi1mjZLeDesn2MzzU3MQfEHJdt8d4s2STWKxIE2NlifslWhtQF8m-A9TIkZBaj-mChpGpmP3GbUyiCTk2tT2sObjWZKcXoG84IjR-Ubeqj_2"/>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-tertiary text-[10px] font-bold uppercase tracking-widest block mb-2">Automate</span>
+                            <h5 class="font-headline font-bold mb-3">The 10% Round-up</h5>
+                            <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Enable automatic transfers of 10% of every income directly to your 'Amalfi' vault. Potential savings: <span class="text-on-surface font-bold">+$120/mo</span>.</p>
+                            <button class="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest group-hover:gap-3 transition-all">
+                                Enable Vault <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Strategy Card 2 -->
+                    <div class="group relative overflow-hidden rounded-lg bg-surface-container-lowest editorial-shadow">
+                        <div class="h-40 overflow-hidden">
+                            <img alt="Strategy image" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJsEZxPTJSsFHHrUOIwPQ-FbaIxIFlAqGJye2fJHxkqiNUV0yArO49ViiWxzqQsZ4SS6qIGo_JfMxT9jSR8v6UNsedvYJz5SQaEph5HWvflcAKbA4a6074oHAfYcrXTe8-gbHqDwjAfx_yWxSSjjiTONPQjm9UimG-yeFDx33csQ7c7tmV01RC4OfvnTSaJ2Qy7CTWk-O5H_7xDOiSRsQGbTTPhUe6qSI_sx3akbkOkiNf58ffiSX3QWQFG6D6omJe8ekSZcRdxev"/>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-tertiary text-[10px] font-bold uppercase tracking-widest block mb-2">Optimize</span>
+                            <h5 class="font-headline font-bold mb-3">Subscription Audit</h5>
+                            <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Our AI detected 3 unused media subscriptions. Cancelling these would cover 2 nights in Positano. Potential savings: <span class="text-on-surface font-bold">+$45/mo</span>.</p>
+                            <button class="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest group-hover:gap-3 transition-all">
+                                Review Subs <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Strategy Card 3 -->
+                    <div class="group relative overflow-hidden rounded-lg bg-surface-container-lowest editorial-shadow">
+                        <div class="h-40 overflow-hidden">
+                            <img alt="Strategy image" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxhiaprOv6NWvlJaRCO65yAKrkbf0ED4ZnEecXawR1XlNhALhG-08c8YKGf_xYoz0LXinOpG9OJAUpIzOWglrehYaOSnRlwRsKkwIJowFEj5RaAlBbGw4NVR7iTGG4S6KolP76mj2hbkWcu6L8yicLMHW208Fspg1BCa_GH7oly52Omc3i4iI5uiN61b7vLN7UNJlev4VlofiBVlBAPN5dnAK72iLy40RzsQO2qDh7n7PYmeTFJzAZVTXEQx4CrEmOlZIil8K4veu1"/>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-tertiary text-[10px] font-bold uppercase tracking-widest block mb-2">Flexible</span>
+                            <h5 class="font-headline font-bold mb-3">Travel Date Shift</h5>
+                            <p class="text-sm text-on-surface-variant leading-relaxed mb-6">Moving your flight to a Tuesday instead of Sunday could lower your total goal by $400 immediately. Potential savings: <span class="text-on-surface font-bold">+$400 total</span>.</p>
+                            <button class="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest group-hover:gap-3 transition-all">
+                                See Dates <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Progress Tracking Bar -->
+        <section class="mt-12 bg-surface-container-high rounded-lg p-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                <div>
+                    <h4 class="font-headline text-lg font-bold">Overall Funding Progress</h4>
+                    <p class="text-xs text-on-surface-variant">Target reached by August 2024</p>
+                </div>
+                <div class="text-right">
+                    <span class="text-2xl font-headline font-extrabold text-on-background">$2,619.50</span>
+                    <span class="text-on-surface-variant text-sm font-medium">/ $8,450.00</span>
+                </div>
+            </div>
+            <div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden">
+                <div class="h-full bg-tertiary w-[31%] rounded-full"></div>
+            </div>
+            <div class="flex justify-between mt-3">
+                <span class="text-[10px] font-bold uppercase text-on-surface-variant tracking-widest">Base Camp</span>
+                <span class="text-[10px] font-bold uppercase text-on-surface-variant tracking-widest">The Horizon</span>
+            </div>
+        </section>
+    </main>
+    <!-- BottomNavBar -->
+    <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#f8f9fa]/80 dark:bg-gray-900/80 backdrop-blur-xl border-t border-[#c1c6d7]/15 shadow-[0_-4px_24px_rgba(25,28,29,0.06)] rounded-t-[2rem]">
+        <a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 px-4 py-2 hover:bg-gray-200/50 transition-colors" data-nav-link="index.html" href="index.html">
+            <span class="material-symbols-outlined mb-1">explore</span>
+            <span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-[0.05em]">Explore</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 px-4 py-2 hover:bg-gray-200/50 transition-colors" data-nav-link="trip-planner.html" href="trip-planner.html">
+            <span class="material-symbols-outlined mb-1">map</span>
+            <span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-[0.05em]">My Trips</span>
+        </a>
+        <a class="flex flex-col items-center justify-center bg-[#0070ea]/10 text-[#0059bb] dark:text-blue-300 rounded-2xl px-4 py-2 active" data-nav-link="finance-planner.html" href="finance-planner.html">
+            <span class="material-symbols-outlined material-symbols-filled mb-1">payments</span>
+            <span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-[0.05em]">Finance</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 px-4 py-2 hover:bg-gray-200/50 transition-colors" data-nav-link="profile.html" href="profile.html">
+            <span class="material-symbols-outlined mb-1">person</span>
+            <span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-[0.05em]">Profile</span>
+        </a>
+    </nav>
+    <script src="js/navigation.js"></script>
+</body>
+</html>
