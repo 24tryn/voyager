@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Voyager | Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="css/shared.css" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-container": "#fffbff",
+                        "on-secondary-fixed-variant": "#763300",
+                        "secondary-container": "#fc8a40",
+                        "tertiary-container": "#9c6b00",
+                        "on-primary-fixed-variant": "#004493",
+                        "outline": "#717786",
+                        "surface-container-high": "#e7e8e9",
+                        "inverse-surface": "#2e3132",
+                        "secondary-fixed": "#ffdbc9",
+                        "primary-fixed": "#d8e2ff",
+                        "secondary-fixed-dim": "#ffb68d",
+                        "surface-variant": "#e1e3e4",
+                        "on-primary-fixed": "#001a41",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#edeeef",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#005bc0",
+                        "on-background": "#191c1d",
+                        "tertiary-fixed": "#ffdead",
+                        "surface-dim": "#d9dadb",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "inverse-primary": "#adc7ff",
+                        "on-secondary-container": "#672c00",
+                        "primary-container": "#0070ea",
+                        "surface-bright": "#f8f9fa",
+                        "on-tertiary-fixed-variant": "#604100",
+                        "surface": "#f8f9fa",
+                        "outline-variant": "#c1c6d7",
+                        "on-surface-variant": "#414754",
+                        "tertiary-fixed-dim": "#ffba3c",
+                        "primary": "#0059bb",
+                        "on-secondary-fixed": "#331200",
+                        "primary-fixed-dim": "#adc7ff",
+                        "surface-container-low": "#f3f4f5",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#281900",
+                        "on-primary-container": "#fefcff",
+                        "on-surface": "#191c1d",
+                        "tertiary": "#7c5400",
+                        "background": "#f8f9fa",
+                        "error-container": "#ffdad6",
+                        "secondary": "#9b4500"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Be Vietnam Pro"],
+                        "label": ["Be Vietnam Pro"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+    <!-- TopAppBar -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-[#f8f9fa] dark:bg-gray-900 flex justify-between items-center px-4 md:px-6 py-4 border-b border-outline-variant/10">
+        <div class="flex items-center gap-2 md:gap-4">
+            <button id="mobile-menu-btn" class="md:hidden text-[#0059bb] dark:text-blue-400 hover:opacity-80 transition-opacity active:scale-95 duration-200" onclick="toggleMobileMenu()">
+                <span class="material-symbols-outlined" id="menu-icon">menu</span>
+            </button>
+            <h1 class="text-xl md:text-2xl font-extrabold text-[#0059bb] dark:text-blue-400 tracking-tighter font-['Plus_Jakarta_Sans']">Voyager</h1>
+        </div>
+        <nav id="desktop-nav" class="hidden md:flex items-center gap-6 lg:gap-8">
+            <a class="text-gray-600 font-['Plus_Jakarta_Sans'] font-bold text-sm hover:opacity-80 transition-opacity" href="index.html">Explore</a>
+            <a class="text-gray-600 font-['Plus_Jakarta_Sans'] font-bold text-sm hover:opacity-80 transition-opacity" href="trip-planner.html">My Trips</a>
+            <a class="text-gray-600 font-['Plus_Jakarta_Sans'] font-bold text-sm hover:opacity-80 transition-opacity" href="finance-planner.html">Finance</a>
+            <a class="text-[#0059bb] font-['Plus_Jakarta_Sans'] font-bold text-sm hover:opacity-80 transition-opacity" href="profile.html">Profile</a>
+        </nav>
+        <div class="flex items-center gap-2 md:gap-4">
+            <button class="hidden md:block text-gray-500 hover:opacity-80 transition-opacity p-1">
+                <span class="material-symbols-outlined text-sm md:text-base">notifications</span>
+            </button>
+            <button class="hidden md:block text-gray-500 hover:opacity-80 transition-opacity p-1">
+                <span class="material-symbols-outlined text-sm md:text-base">settings</span>
+            </button>
+        </div>
+    </header>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed top-16 left-0 w-full bg-surface-container-lowest border-b border-outline-variant/20 z-40 max-h-0 overflow-hidden transition-all duration-300">
+        <nav class="px-4 py-4 space-y-2">
+            <a class="block text-gray-600 font-['Plus_Jakarta_Sans'] font-bold py-2 px-4 rounded hover:bg-primary/10 transition-colors" href="index.html">Explore</a>
+            <a class="block text-gray-600 font-['Plus_Jakarta_Sans'] font-bold py-2 px-4 rounded hover:bg-primary/10 transition-colors" href="trip-planner.html">My Trips</a>
+            <a class="block text-gray-600 font-['Plus_Jakarta_Sans'] font-bold py-2 px-4 rounded hover:bg-primary/10 transition-colors" href="finance-planner.html">Finance</a>
+            <a class="block text-[#0059bb] font-['Plus_Jakarta_Sans'] font-bold py-2 px-4 rounded hover:bg-primary/10 transition-colors" href="profile.html">Profile</a>
+        </nav>
+    </div>
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            const isOpen = menu.classList.contains('hidden');
+            if (isOpen) {
+                menu.classList.remove('hidden');
+                menu.style.maxHeight = menu.scrollHeight + 'px';
+                icon.textContent = 'close';
+            } else {
+                menu.style.maxHeight = '0';
+                icon.textContent = 'menu';
+                setTimeout(() => menu.classList.add('hidden'), 300);
+            }
+        }
+    </script>
+
+    <main class="pt-24 pb-32 px-3 md:px-6 max-w-7xl mx-auto">
+        <!-- Hero Section: Profile Header -->
+        <section class="relative mb-8 md:mb-12 -mx-3 md:-mx-6 px-3 md:px-6 py-6 md:py-12 bg-gradient-to-r from-primary/10 to-primary-container/10 rounded-b-lg">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-8">
+                <div class="flex items-end gap-3 md:gap-6">
+                    <div class="relative">
+                        <img alt="User profile" class="w-16 md:w-24 h-16 md:h-24 rounded-full object-cover border-4 border-surface-container-lowest editorial-shadow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn2MH8kB-jhF4b1RQq-kz2HcJHOhP1RFg_pVMLRd4fH6bDjoCYweZKVFJbHSavCpzCPjG_FDcYKrmcRLd9xpw4d_0d-HH9nu_0rHRt3rHMqSkyJRoJhGvnmHKiq9i4Y1JA8aFhL7nw2laVTlDn1NC5HHmoDdx0QNIHsb-aK9xocIv_gWpDHI3UYbzvQ268zu0eBhUWwCMhU20LZblUFYMKMsMs5q35Ggt_bA_jB8gSKbxBC36TjAHFdK3cI7xEQIK1Es0UHCUDJNyv"/>
+                        <div class="absolute bottom-0 right-0 bg-secondary-container text-on-secondary-container px-1.5 py-0.5 rounded-full text-[8px] md:text-[10px] font-bold flex items-center gap-1 editorial-shadow">
+                            <span class="material-symbols-outlined material-symbols-filled text-xs md:text-sm">verified</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h1 class="font-headline text-2xl md:text-4xl font-extrabold text-on-surface">Alex Rivera</h1>
+                        <p class="text-on-surface-variant font-medium text-xs md:text-sm">Travel Enthusiast • 12 Trips</p>
+                        <p class="text-primary font-bold tracking-wide text-xs md:text-sm mt-1">Member since Jan 2023</p>
+                    </div>
+                </div>
+                <button onclick="editProfile()" class="hidden md:flex items-center gap-2 bg-primary text-on-primary px-6 md:px-8 py-2 md:py-3 rounded-full font-bold hover:opacity-90 transition-all text-sm md:text-base">
+                    <span class="material-symbols-outlined">edit</span>
+                    Edit Profile
+                </button>
+            </div>
+        </section>
+
+        <!-- Quick Stats Grid -->
+        <section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 md:gap-4 mb-8 md:mb-12">
+            <div class="bg-surface-container-lowest p-3 md:p-4 rounded-lg text-center editorial-shadow">
+                <p class="text-xl md:text-2xl font-headline font-extrabold text-primary mb-1">12</p>
+                <p class="text-[9px] md:text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Trips</p>
+            </div>
+            <div class="bg-surface-container-lowest p-3 md:p-4 rounded-lg text-center editorial-shadow">
+                <p class="text-xl md:text-2xl font-headline font-extrabold text-secondary mb-1">28</p>
+                <p class="text-[9px] md:text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Saved</p>
+            </div>
+            <div class="bg-surface-container-lowest p-3 md:p-4 rounded-lg text-center editorial-shadow">
+                <p class="text-xl md:text-2xl font-headline font-extrabold text-tertiary mb-1">5</p>
+                <p class="text-[9px] md:text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Ongoing</p>
+            </div>
+            <div class="hidden sm:block bg-surface-container-lowest p-3 md:p-4 rounded-lg text-center editorial-shadow">
+                <p class="text-xl md:text-2xl font-headline font-extrabold text-primary-container mb-1">⭐4.9</p>
+                <p class="text-[9px] md:text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Ratings</p>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8">
+            <!-- Left Column: Account Settings -->
+            <div class="lg:col-span-1 space-y-4 md:space-y-6">
+                <!-- Account Info Card -->
+                <div class="bg-surface-container-lowest p-4 md:p-6 rounded-lg editorial-shadow space-y-4">
+                    <h3 class="font-headline text-base md:text-lg font-bold flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-sm md:text-base">account_circle</span>
+                        Account
+                    </h3>
+                    <div class="space-y-3 border-t border-outline-variant/15 pt-4">
+                        <div>
+                            <p class="text-[9px] md:text-[10px] font-bold text-on-surface-variant uppercase tracking-wider mb-1">Email</p>
+                            <p class="font-medium text-sm">alex.rivera@email.com</p>
+                        </div>
+                        <div>
+                            <p class="text-[9px] md:text-[10px] font-bold text-on-surface-variant uppercase tracking-wider mb-1">Phone</p>
+                            <p class="font-medium text-sm">+1 (555) 123-4567</p>
+                        </div>
+                        <div>
+                            <p class="text-[9px] md:text-[10px] font-bold text-on-surface-variant uppercase tracking-wider mb-1">Location</p>
+                            <p class="font-medium text-sm">San Francisco, USA</p>
+                        </div>
+                    </div>
+                    <button onclick="editDetails()" class="w-full text-primary font-bold text-xs md:text-sm uppercase tracking-wider pt-2 border-t border-outline-variant/15 hover:opacity-80 transition-opacity">
+                        Edit Details
+                    </button>
+                </div>
+
+                <!-- Preferences Card -->
+                <div class="bg-surface-container-lowest p-4 md:p-6 rounded-lg editorial-shadow space-y-4">
+                    <h3 class="font-headline text-base md:text-lg font-bold flex items-center gap-2">
+                        <span class="material-symbols-outlined text-tertiary text-sm md:text-base">tune</span>
+                        Preferences
+                    </h3>
+                    <div class="space-y-3 border-t border-outline-variant/15 pt-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs md:text-sm font-medium">Travel Alerts</span>
+                            <input type="checkbox" aria-label="Enable Travel Alerts" class="w-4 md:w-5 h-4 md:h-5 rounded" checked/>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs md:text-sm font-medium">Deals & Offers</span>
+                            <input type="checkbox" aria-label="Enable Deals & Offers" class="w-4 md:w-5 h-4 md:h-5 rounded" checked/>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs md:text-sm font-medium">Dark Mode</span>
+                            <input type="checkbox" aria-label="Enable Dark Mode" class="w-4 md:w-5 h-4 md:h-5 rounded"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Card -->
+                <div class="bg-surface-container-lowest p-4 md:p-6 rounded-lg editorial-shadow space-y-4">
+                    <h3 class="font-headline text-base md:text-lg font-bold flex items-center gap-2">
+                        <span class="material-symbols-outlined text-error text-sm md:text-base">security</span>
+                        Security
+                    </h3>
+                    <button onclick="changePassword()" class="w-full text-left py-2 text-xs md:text-sm font-medium hover:text-primary transition-colors border-t border-outline-variant/15 pt-4">
+                        Change Password
+                    </button>
+                    <button onclick="enable2FA()" class="w-full text-left py-2 text-xs md:text-sm font-medium hover:text-primary transition-colors border-t border-outline-variant/15">
+                        Two-Factor Authentication
+                    </button>
+                    <button onclick="signOutAllDevices()" class="w-full text-left py-2 text-xs md:text-sm font-medium hover:text-error transition-colors border-t border-outline-variant/15">
+                        Sign Out All Devices
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Column: Trips & Activity -->
+            <div class="lg:col-span-2 space-y-6 md:space-y-8">
+                <!-- Upcoming Trips -->
+                <div>
+                    <h3 class="font-headline text-lg md:text-xl font-bold mb-4 md:mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined material-symbols-filled text-secondary-container text-sm md:text-base">flight_takeoff</span>
+                        Upcoming Trips
+                    </h3>
+                    <div class="space-y-3 md:space-y-4">
+                        <!-- Trip Card 1 -->
+                        <div class="bg-surface-container-lowest p-4 md:p-6 rounded-lg editorial-shadow border border-outline-variant/10 hover:border-primary/30 transition-colors group cursor-pointer">
+                            <div class="flex items-start justify-between mb-3 md:mb-4 gap-2">
+                                <div>
+                                    <h4 class="font-headline text-base md:text-lg font-bold text-on-surface">Amalfi Coast Adventure</h4>
+                                    <p class="text-on-surface-variant text-xs md:text-sm">Italy • 14 Days</p>
+                                </div>
+                                <span class="bg-secondary-container text-on-secondary-container px-2 md:px-3 py-0.5 md:py-1 rounded-full text-[10px] md:text-xs font-bold whitespace-nowrap">In 45 days</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-3 md:pt-4 border-t border-outline-variant/15">
+                                <div class="flex gap-3 md:gap-4">
+                                    <div>
+                                        <p class="text-[9px] md:text-[10px] text-on-surface-variant uppercase font-bold">Budget</p>
+                                        <p class="font-headline font-extrabold text-sm md:text-base">$8,450</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[9px] md:text-[10px] text-on-surface-variant uppercase font-bold">Saved</p>
+                                        <p class="font-headline font-extrabold text-primary text-sm md:text-base">$2,620</p>
+                                    </div>
+                                </div>
+                                <button class="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <span class="material-symbols-outlined text-sm md:text-base">arrow_forward</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Trip Card 2 -->
+                        <div class="bg-surface-container-lowest p-4 md:p-6 rounded-lg editorial-shadow border border-outline-variant/10 hover:border-primary/30 transition-colors group cursor-pointer">
+                            <div class="flex items-start justify-between mb-3 md:mb-4 gap-2">
+                                <div>
+                                    <h4 class="font-headline text-base md:text-lg font-bold text-on-surface">Tokyo Urban Explorer</h4>
+                                    <p class="text-on-surface-variant text-xs md:text-sm">Japan • 10 Days</p>
+                                </div>
+                                <span class="bg-primary text-on-primary px-2 md:px-3 py-0.5 md:py-1 rounded-full text-[10px] md:text-xs font-bold whitespace-nowrap">In 90 days</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-3 md:pt-4 border-t border-outline-variant/15">
+                                <div class="flex gap-3 md:gap-4">
+                                    <div>
+                                        <p class="text-[9px] md:text-[10px] text-on-surface-variant uppercase font-bold">Budget</p>
+                                        <p class="font-headline font-extrabold text-sm md:text-base">$5,200</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[9px] md:text-[10px] text-on-surface-variant uppercase font-bold">Saved</p>
+                                        <p class="font-headline font-extrabold text-primary text-sm md:text-base">$1,800</p>
+                                    </div>
+                                </div>
+                                <button class="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <span class="material-symbols-outlined text-sm md:text-base">arrow_forward</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Past Trips -->
+                <div>
+                    <h3 class="font-headline text-lg md:text-xl font-bold mb-4 md:mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined material-symbols-filled text-tertiary text-sm md:text-base">history</span>
+                        Past Adventures
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+                        <!-- Past Trip 1 -->
+                        <div class="relative overflow-hidden rounded-lg aspect-[4/3] group cursor-pointer">
+                            <img alt="Barcelona" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPwlMzOBqTm5yhn9VAEKxexTNfQSge38y6Spq2KdGHc6eZv2bWL3sdPy8KTsx464TkBvcmLhj1_JiF38PTjm8TPzLiiNh5wdf5ac8NzHqDiYgHW45Y_yvFb2R_9D6tKqFw--NeeAcjYnFhSsPDhFM9SDGcGfFjFr4qckt0jb8j_lcuUfG5d5c_Cf9DZu_-aK6IHZKx18hsJz-1w-sZOH_qWtbeiwxIEakZaEd1qkU_YywJRW1zbUCWJG3ZXSr_T-ULuj4W2vZ0LIcy"/>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-4">
+                                <h4 class="font-headline font-bold text-white">Barcelona Escapade</h4>
+                                <p class="text-white/80 text-xs">Oct 2023 • 7 Days</p>
+                            </div>
+                        </div>
+
+                        <!-- Past Trip 2 -->
+                        <div class="relative overflow-hidden rounded-lg aspect-[4/3] group cursor-pointer">
+                            <img alt="Bali" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVplr1185h2C2f6k-QjNmv2nWzRtmppTrk-1FxQLe6hIay7VzQOG_IKMoadDBif1xy0aCxEPo5PDGMN0ISXsqbn3MvSLNeTjWkguQUmENT_Znsueiy2nQMn6zZiChgsi01FSKR2wHMgC7Z-lBFX39Lkb2gZT7ESPIje9NFGgkcpcCbldre6nMJzmJa7Dns7m52Inp1XcXzKDhZ4vpeL3VKPLh4Swm0EicaCHYfSH2Piz1yNJ3yxQT11Z_eMjlmQn4A9bk4N9JlvtQw"/>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-4">
+                                <h4 class="font-headline font-bold text-white">Bali Bliss</h4>
+                                <p class="text-white/80 text-xs">Jul 2023 • 12 Days</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Methods -->
+                <div>
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="font-headline text-xl font-bold flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">credit_card</span>
+                            Payment Methods
+                        </h3>
+                        <button onclick="addPaymentMethod()" class="text-primary font-bold text-sm hover:opacity-80 transition-opacity">+ Add</button>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="bg-surface-container-lowest p-4 rounded-lg flex items-center justify-between border border-outline-variant/10">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-8 bg-primary/20 rounded flex items-center justify-center">
+                                    <span class="text-sm font-bold text-primary">Visa</span>
+                                </div>
+                                <div>
+                                    <p class="font-bold">Visa •••• 4242</p>
+                                    <p class="text-xs text-on-surface-variant">Expires 12/25</p>
+                                </div>
+                            </div>
+                            <button onclick="openPaymentOptions()" class="text-on-surface-variant hover:text-on-surface transition-colors">
+                                <span class="material-symbols-outlined text-lg">more_vert</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Actions -->
+        <div class="mt-8 md:mt-12 pt-6 md:pt-8 border-t border-outline-variant/15 flex flex-col md:flex-row gap-3 md:gap-4">
+            <button onclick="openHelpSupport()" class="flex-1 text-center py-2 md:py-3 text-primary font-bold text-xs md:text-sm uppercase tracking-wider hover:opacity-80 transition-opacity">
+                <span class="inline-flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-sm md:text-base">help</span>
+                    <span class="hidden sm:inline">Help & Support</span>
+                    <span class="sm:hidden">Help</span>
+                </span>
+            </button>
+            <button onclick="openPrivacyPolicy()" class="flex-1 text-center py-2 md:py-3 text-primary font-bold text-xs md:text-sm uppercase tracking-wider hover:opacity-80 transition-opacity">
+                <span class="inline-flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-sm md:text-base">privacy_tip</span>
+                    <span class="hidden sm:inline">Privacy Policy</span>
+                    <span class="sm:hidden">Privacy</span>
+                </span>
+            </button>
+            <button onclick="signOut()" class="flex-1 text-center py-2 md:py-3 text-error font-bold text-xs md:text-sm uppercase tracking-wider hover:opacity-80 transition-opacity border-t border-error/20 md:border-t-0 md:border-l md:border-l-error/20 pt-3 md:pt-2 md:pt-3">
+                <span class="inline-flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-sm md:text-base">logout</span>
+                    <span class="hidden sm:inline">Sign Out</span>
+                    <span class="sm:hidden">Logout</span>
+                </span>
+            </button>
+        </div>
+    </main>
+
+    <!-- BottomNavBar -->
+    <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#f8f9fa]/80 dark:bg-gray-900/80 backdrop-blur-xl border-t border-[#c1c6d7]/15 shadow-[0_-4px_24px_rgba(25,28,29,0.06)] rounded-t-[2rem] md:hidden">
+        <a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 px-4 py-2 hover:bg-gray-200/50" data-nav-link="index.html" href="index.html">
+            <span class="material-symbols-outlined">explore</span>
+            <span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-[0.05em] mt-1">Explore</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 px-4 py-2 hover:bg-gray-200/50" data-nav-link="trip-planner.html" href="trip-planner.html">
+            <span class="material-symbols-outlined">map</span>
+            <span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-[0.05em] mt-1">My Trips</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 px-4 py-2 hover:bg-gray-200/50" data-nav-link="finance-planner.html" href="finance-planner.html">
+            <span class="material-symbols-outlined">payments</span>
+            <span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-[0.05em] mt-1">Finance</span>
+        </a>
+        <a class="flex flex-col items-center justify-center bg-[#0070ea]/10 text-[#0059bb] dark:text-blue-300 rounded-2xl px-4 py-2 active" data-nav-link="profile.html" href="profile.html">
+            <span class="material-symbols-outlined material-symbols-filled">person</span>
+            <span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-[0.05em] mt-1">Profile</span>
+        </a>
+    </nav>
+
+    <script src="js/navigation.js"></script>
+    <script>
+        // Profile Button Handlers
+        function editProfile() {
+            alert('📝 Edit Profile feature coming soon!');
+            // window.location.href = 'edit-profile.html';
+        }
+
+        function editDetails() {
+            alert('✏️ Editing account details...');
+        }
+
+        function changePassword() {
+            alert('🔐 Change Password feature coming soon!');
+        }
+
+        function enable2FA() {
+            alert('🔒 Two-Factor Authentication setup coming soon!');
+        }
+
+        function signOutAllDevices() {
+            if (confirm('⚠️ Sign out from all devices? You will be logged out immediately.')) {
+                alert('✅ Signing out from all devices...');
+                // window.location.href = 'index.html';
+            }
+        }
+
+        function addPaymentMethod() {
+            alert('💳 Add Payment Method feature coming soon!');
+        }
+
+        function openPaymentOptions() {
+            alert('⚙️ Payment Options: Edit, Delete, or Set as Default');
+        }
+
+        function openHelpSupport() {
+            window.open('https://support.example.com', '_blank');
+            // alert('📞 Help & Support - Redirecting to support page');
+        }
+
+        function openPrivacyPolicy() {
+            window.open('https://example.com/privacy', '_blank');
+            // alert('🔒 Privacy Policy - Redirecting to privacy page');
+        }
+
+        function signOut() {
+            if (confirm('Are you sure you want to sign out?')) {
+                alert('👋 Signing out...');
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+</html>

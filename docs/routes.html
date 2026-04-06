@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Routes & Directions - Voyager Travel Planner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="css/shared.css" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-container": "#fffbff",
+                        "on-secondary-fixed-variant": "#763300",
+                        "secondary-container": "#fc8a40",
+                        "tertiary-container": "#9c6b00",
+                        "on-primary-fixed-variant": "#004493",
+                        "outline": "#717786",
+                        "surface-container-high": "#e7e8e9",
+                        "inverse-surface": "#2e3132",
+                        "secondary-fixed": "#ffdbc9",
+                        "primary-fixed": "#d8e2ff",
+                        "secondary-fixed-dim": "#ffb68d",
+                        "surface-variant": "#e1e3e4",
+                        "on-primary-fixed": "#001a41",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#edeeef",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#005bc0",
+                        "on-background": "#191c1d",
+                        "tertiary-fixed": "#ffdead",
+                        "surface-dim": "#d9dadb",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "inverse-primary": "#adc7ff",
+                        "on-secondary-container": "#672c00",
+                        "primary-container": "#0070ea",
+                        "surface-bright": "#f8f9fa",
+                        "on-tertiary-fixed-variant": "#604100",
+                        "surface": "#f8f9fa",
+                        "outline-variant": "#c1c6d7",
+                        "on-surface-variant": "#414754",
+                        "tertiary-fixed-dim": "#ffba3c",
+                        "primary": "#0059bb",
+                        "on-secondary-fixed": "#331200",
+                        "primary-fixed-dim": "#adc7ff",
+                        "surface-container-low": "#f3f4f5",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#281900",
+                        "on-primary-container": "#fefcff",
+                        "on-surface": "#191c1d",
+                        "tertiary": "#7c5400",
+                        "background": "#f8f9fa",
+                        "error-container": "#ffdad6",
+                        "secondary": "#9b4500"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Be Vietnam Pro"],
+                        "label": ["Be Vietnam Pro"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            box-shadow: 0 24px 48px -12px rgba(25, 28, 29, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+    <!-- TopAppBar -->
+    <header class="bg-[#f8f9fa] dark:bg-gray-900 docked full-width top-0 z-40 sticky border-b border-outline-variant/10">
+        <div class="flex justify-between items-center w-full px-4 md:px-6 py-4">
+            <div class="flex items-center gap-2 md:gap-4">
+                <button class="text-[#0059bb] dark:text-blue-400 hover:opacity-80 transition-opacity active:scale-95 duration-200" onclick="window.location.href='index.html'">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+                <span class="text-xl md:text-2xl font-extrabold text-[#0059bb] dark:text-blue-400 tracking-tighter font-['Plus_Jakarta_Sans']">Routes</span>
+            </div>
+            <nav id="desktop-nav" class="hidden md:flex items-center gap-6 lg:gap-8">
+                <a class="text-gray-500 dark:text-gray-400 font-['Plus_Jakarta_Sans'] font-bold text-sm hover:opacity-80 transition-opacity" href="index.html">Explore</a>
+                <a class="text-[#0059bb] dark:text-blue-400 font-['Plus_Jakarta_Sans'] font-bold text-sm hover:opacity-80 transition-opacity" href="#">Routes</a>
+                <a class="text-gray-500 dark:text-gray-400 font-['Plus_Jakarta_Sans'] font-bold text-sm hover:opacity-80 transition-opacity" href="trip-planner.html">My Trips</a>
+            </nav>
+            <div class="flex items-center gap-2">
+                <button class="text-on-surface-variant hover:text-on-surface transition-colors p-1" data-theme-toggle onclick="ThemeManager.toggle()" title="Toggle Dark Mode">
+                    <span class="material-symbols-outlined text-sm md:text-base">dark_mode</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="min-h-screen pb-32 px-6 md:px-20 pt-8">
+        <!-- Location Selection Section -->
+        <section class="mb-12">
+            <h1 class="text-4xl font-bold text-on-surface mb-8">Plan Your Route</h1>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- From Location -->
+                <div class="bg-surface-container-lowest border border-outline-variant/20 rounded-2xl p-6">
+                    <h2 class="text-lg font-semibold text-on-surface mb-4 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">my_location</span>
+                        Starting From
+                    </h2>
+                    <div class="space-y-4">
+                        <button class="w-full bg-primary text-on-primary px-4 py-3 rounded-full font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-2" id="detect-location-btn">
+                            <span class="material-symbols-outlined">gps_fixed</span>
+                            Detect My Location
+                        </button>
+                        <div class="text-center text-sm text-on-surface-variant">OR</div>
+                        <input 
+                            type="text" 
+                            id="from-location-input" 
+                            placeholder="Enter your starting city..." 
+                            class="w-full px-4 py-3 border border-outline-variant/30 rounded-full focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        >
+                        <div id="from-location-display" class="text-sm text-on-surface-variant hidden">
+                            <p>📍 <span id="from-location-text"></span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- To Location -->
+                <div class="bg-surface-container-lowest border border-outline-variant/20 rounded-2xl p-6">
+                    <h2 class="text-lg font-semibold text-on-surface mb-4 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-secondary">location_on</span>
+                        Destination
+                    </h2>
+                    <div class="space-y-4 relative">
+                        <input 
+                            type="text" 
+                            id="to-location-input" 
+                            placeholder="Enter destination..." 
+                            class="w-full px-4 py-3 border border-outline-variant/30 rounded-full focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                            autocomplete="off"
+                        >
+                        <!-- Autocomplete suggestions dropdown -->
+                        <div id="destination-suggestions" class="hidden absolute top-12 left-0 right-0 bg-surface-container-lowest border border-outline-variant/30 rounded-lg shadow-lg z-50 max-h-64 overflow-y-auto">
+                            <!-- Suggestions will be populated here -->
+                        </div>
+                        <div id="to-location-display" class="text-sm text-on-surface-variant hidden">
+                            <p>📍 <span id="to-location-text"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Routes Section -->
+        <section id="routes-section" class="hidden">
+            <h2 class="text-2xl font-bold text-on-surface mb-6">Available Routes</h2>
+            
+            <div class="grid gap-4" id="routes-container">
+                <!-- Route cards will be populated here -->
+            </div>
+        </section>
+
+        <!-- Loading State -->
+        <div id="loading-state" class="hidden text-center py-12">
+            <div class="inline-block">
+                <div class="animate-spin">
+                    <span class="material-symbols-outlined text-4xl text-primary">autorenew</span>
+                </div>
+                <p class="text-on-surface-variant mt-4">Calculating routes...</p>
+            </div>
+        </div>
+
+        <!-- Error State -->
+        <div id="error-state" class="hidden bg-error-container border border-error text-on-error-container p-4 rounded-lg">
+            <h3 class="font-semibold flex items-center gap-2 mb-2">
+                <span class="material-symbols-outlined">error</span>
+                Error
+            </h3>
+            <p id="error-message"></p>
+        </div>
+
+        <!-- Trip Export Section -->
+        <section id="export-section" class="hidden mt-16 bg-gradient-to-r from-primary/10 to-primary-container/10 border border-primary/20 rounded-2xl p-8">
+            <h2 class="text-2xl font-bold text-on-surface mb-6 flex items-center gap-2">
+                <span class="material-symbols-outlined">download</span>
+                Export Trip
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-4">
+                <button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-2" onclick="exportCurrentTrip('json')">
+                    <span class="material-symbols-outlined">description</span>
+                    Export as JSON
+                </button>
+                <button class="bg-secondary text-on-secondary px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-2" onclick="exportCurrentTrip('pdf')">
+                    <span class="material-symbols-outlined">picture_as_pdf</span>
+                    Export as PDF
+                </button>
+                <button class="bg-tertiary text-on-tertiary px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-2" onclick="exportCurrentTrip('ics')">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    Export as Calendar
+                </button>
+                <button class="bg-surface-container-high text-on-surface px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-2" onclick="copyTripLink()">
+                    <span class="material-symbols-outlined">share</span>
+                    Copy Share Link
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/api-config.js"></script>
+    <script src="js/geolocation.js"></script>
+    <script src="js/attractions-api.js"></script>
+    <script src="js/directions.js"></script>
+    <script src="js/trip-exporter.js"></script>
+    <script src="js/routes.js"></script>
+</body>
+</html>

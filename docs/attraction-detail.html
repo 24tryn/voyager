@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Voyager | Machu Picchu</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Be_Vietnam_Pro:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="css/shared.css" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-container": "#fffbff",
+                        "on-secondary-fixed-variant": "#763300",
+                        "secondary-container": "#fc8a40",
+                        "tertiary-container": "#9c6b00",
+                        "on-primary-fixed-variant": "#004493",
+                        "outline": "#717786",
+                        "surface-container-high": "#e7e8e9",
+                        "inverse-surface": "#2e3132",
+                        "secondary-fixed": "#ffdbc9",
+                        "primary-fixed": "#d8e2ff",
+                        "secondary-fixed-dim": "#ffb68d",
+                        "surface-variant": "#e1e3e4",
+                        "on-primary-fixed": "#001a41",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#edeeef",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#005bc0",
+                        "on-background": "#191c1d",
+                        "tertiary-fixed": "#ffdead",
+                        "surface-dim": "#d9dadb",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "inverse-primary": "#adc7ff",
+                        "on-secondary-container": "#672c00",
+                        "primary-container": "#0070ea",
+                        "surface-bright": "#f8f9fa",
+                        "on-tertiary-fixed-variant": "#604100",
+                        "surface": "#f8f9fa",
+                        "outline-variant": "#c1c6d7",
+                        "on-surface-variant": "#414754",
+                        "tertiary-fixed-dim": "#ffba3c",
+                        "primary": "#0059bb",
+                        "on-secondary-fixed": "#331200",
+                        "primary-fixed-dim": "#adc7ff",
+                        "surface-container-low": "#f3f4f5",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#281900",
+                        "on-primary-container": "#fefcff",
+                        "on-surface": "#191c1d",
+                        "tertiary": "#7c5400",
+                        "background": "#f8f9fa",
+                        "error-container": "#ffdad6",
+                        "secondary": "#9b4500"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Be Vietnam Pro"],
+                        "label": ["Be Vietnam Pro"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+    <style>
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(25, 28, 29, 0) 0%, rgba(25, 28, 29, 0.4) 60%, rgba(248, 249, 250, 1) 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+    <!-- TopAppBar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#f8f9fa] dark:bg-gray-900 flex justify-between items-center w-full px-4 md:px-6 py-4 transition-all border-b border-outline-variant/10">
+        <div class="flex items-center gap-2 md:gap-4">
+            <button data-back-btn class="hover:opacity-80 transition-opacity active:scale-95 duration-200" onclick="window.history.back()">
+                <span class="material-symbols-outlined text-[#0059bb] dark:text-blue-400">arrow_back</span>
+            </button>
+            <h1 class="font-['Plus_Jakarta_Sans'] font-bold tracking-tight text-xl md:text-2xl font-extrabold text-[#0059bb] dark:text-blue-400 tracking-tighter">Voyager</h1>
+        </div>
+        <div class="flex items-center gap-2 md:gap-4">
+            <button class="text-gray-500 hover:opacity-80 transition-opacity p-1" data-theme-toggle onclick="ThemeManager.toggle()" title="Toggle Dark Mode">
+                <span class="material-symbols-outlined text-sm md:text-base">dark_mode</span>
+            </button>
+            <button class="text-gray-500 hover:opacity-80 transition-opacity p-1">
+                <span class="material-symbols-outlined text-sm md:text-base">share</span>
+            </button>
+            <div class="w-8 md:w-10 h-8 md:h-10 rounded-full bg-surface-container-high overflow-hidden">
+                <img alt="User profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_VL5VLuXUd9bpmrVwFPx737ZPxx_7iaUKIAj60ePAGrCLoWnhRHyieG6rgeEO2Gx1rR9exrM0PD_1W95tCAmCug7-tk-uf_bQ2UrUSSZXJx5tM5NQpTpW9snCHYfSp7tGtNFLmctc8qowBmGQSjiHdHS4BcmIbEk2HQvk3aslzKTtR_8aAL04EomjKM79TGw-ZvriIQkS2A587XEQ5z-LQX8Ebf54DeZXn4ynuaVfqKEeZ0Ee3iXFGUhL7Hx8dhXqusV9zBcNY4Jc"/>
+            </div>
+        </div>
+    </header>
+    <main class="pb-32">
+        <!-- Hero Section -->
+        <section class="relative h-[663px] w-full overflow-hidden">
+            <img alt="Machu Picchu" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYc9-2yq8KFE62kA-Vh0IjN7FqJq5VFD9yyv4QpjszgETFVlsH8PD2Y0G5xvsXN4hiyHe-4RCI-hMiabzHlJvu1KMtWPIbDr850xcj8f92yggrF4DzmDfasQQIMJBe_40QDk9E_LaPya-c23vTJkJqQejGGXlzQJ3BPxPkQq20Z7qH0IT6FDT6RWJhmugocxYbRgDC-PVCfIua_75Hy1VNRwvNBkxtOG97hVWIBW0xbxB3wVI9zGfr3jLhc8MYq_XBM656hIyhhMhA"/>
+            <div class="absolute inset-0 hero-gradient"></div>
+            <div class="absolute bottom-0 left-0 right-0 px-8 pb-12">
+                <div class="inline-flex bg-secondary-container text-on-secondary-container px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-4 editorial-shadow" data-category-badge>
+                    Wonders of the World
+                </div>
+                <h2 class="font-headline text-7xl md:text-9xl font-extrabold text-on-surface leading-[0.85] tracking-tighter -ml-1 opacity-90">
+                    Machu <br/>Picchu
+                </h2>
+                <div class="mt-6 flex items-center gap-2 text-primary font-semibold">
+                    <span class="material-symbols-outlined">location_on</span>
+                    <span class="font-label tracking-wide uppercase text-sm" data-location-text>Cusco Region, Peru</span>
+                </div>
+            </div>
+        </section>
+        <!-- Content Grid -->
+        <section class="px-8 mt-12 grid grid-cols-1 md:grid-cols-12 gap-12">
+            <!-- Left Column: Narrative -->
+            <div class="md:col-span-7 space-y-8">
+                <div class="space-y-4">
+                    <h3 class="font-headline text-3xl text-on-surface leading-tight">A citadel in the clouds, whispering secrets of the Incan Empire.</h3>
+                    <p class="text-on-surface-variant text-lg leading-relaxed max-w-2xl">
+                        High atop the Andean mountains, Machu Picchu stands as a testament to human ingenuity. This 15th-century citadel remains one of the world's most enigmatic archaeological sites, offering breathtaking panoramic views and a deep spiritual connection to the ancient past.
+                    </p>
+                </div>
+                <!-- Key Stats: Bento Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-surface-container-low p-6 rounded-lg transition-transform hover:scale-[1.02] duration-300">
+                        <span class="material-symbols-outlined text-tertiary mb-3 text-3xl">calendar_month</span>
+                        <p class="font-label text-xs text-outline tracking-widest uppercase mb-1">Best Visit</p>
+                        <p class="font-headline text-xl text-on-surface">May – Oct</p>
+                    </div>
+                    <div class="bg-surface-container-low p-6 rounded-lg transition-transform hover:scale-[1.02] duration-300">
+                        <span class="material-symbols-outlined text-tertiary mb-3 text-3xl">schedule</span>
+                        <p class="font-label text-xs text-outline tracking-widest uppercase mb-1">Duration</p>
+                        <p class="font-headline text-xl text-on-surface">4 – 6 Hours</p>
+                    </div>
+                    <div class="bg-surface-container-low p-6 rounded-lg transition-transform hover:scale-[1.02] duration-300">
+                        <span class="material-symbols-outlined text-tertiary mb-3 text-3xl">thermostat</span>
+                        <p class="font-label text-xs text-outline tracking-widest uppercase mb-1">Avg Temp</p>
+                        <p class="font-headline text-xl text-on-surface">18°C / 64°F</p>
+                    </div>
+                    <div class="bg-surface-container-low p-6 rounded-lg transition-transform hover:scale-[1.02] duration-300">
+                        <span class="material-symbols-outlined text-tertiary mb-3 text-3xl">hiking</span>
+                        <p class="font-label text-xs text-outline tracking-widest uppercase mb-1">Difficulty</p>
+                        <p class="font-headline text-xl text-on-surface">Moderate</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Column: Map and CTA -->
+            <div class="md:col-span-5 space-y-6">
+                <!-- Interactive Map -->
+                <div class="bg-surface-container-highest rounded-lg overflow-hidden h-[300px] relative editorial-shadow group">
+                    <img alt="Map" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxzxWTMgkWXSHgELlDju-jLY3zK83BLgHPUc7cAxcuihbrlr9WP35d58vAg7_rpihshSLgYBFpbxY5qFV89fePbE8JKM39V_-yDygix6P90uMyIF8ZnmTmROwqSNr9koqZGUtpwq3bS6qqG5QAii-5vMS4v1ljDkdrEXcod7FVJcXGfUvuXRXkSw3CDjXGDtf0MdQwpL13WHkCDgt_Eg31wW9hICmkc2HD-yw2cJTtOCSZFRweG9QflZfy0cRud9h_oK1rRsY9KJLV"/>
+                    <div class="absolute inset-0 bg-primary/10"></div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+                        <div class="bg-surface-container-lowest px-3 py-1.5 rounded-full editorial-shadow mb-2 border border-outline-variant/15 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                            <span class="font-headline text-xs font-bold">Lost City</span>
+                        </div>
+                        <div class="w-10 h-10 bg-primary rounded-full border-4 border-surface-container-lowest editorial-shadow flex items-center justify-center">
+                            <span class="material-symbols-outlined material-symbols-filled text-white text-sm">location_on</span>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-4 left-4 right-4 bg-surface-container-lowest/90 backdrop-blur-md p-3 rounded flex justify-between items-center">
+                        <span class="text-xs font-label font-bold uppercase tracking-tighter" data-coords-display>Coordinates: 13.1631° S</span>
+                        <button class="text-primary text-xs font-bold uppercase" data-maps-btn onclick="window.open('https://maps.google.com?q=Machu+Picchu')">Open Maps</button>
+                    </div>
+                </div>
+                <!-- Featured Image -->
+                <div class="relative pl-8 pt-4">
+                    <div class="absolute top-0 left-0 w-32 h-32 bg-secondary-fixed opacity-20 rounded-full -z-10 blur-3xl"></div>
+                    <div class="bg-surface-container-lowest p-2 rounded-lg editorial-shadow rotate-3 hover:rotate-0 transition-transform duration-500">
+                        <img alt="Machu Picchu Experience" class="rounded w-full h-48 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRyBoHCft8D0ECSBjqAqrLMxOIdfQdDttRA4XmIvIPsVrGIDUAmvB0Vr2_iMtMZlBNQcVKMIrHiBPdKrod3FjFXy4pU2NTfO0gGp7AzhiBtW-GansqQqakzObS9eTSCL5IeoHZgRdkiYODsPsi7EXBgj4EcB8yu7nvSEfRGBkDDqHzgpRA3q1g8m7pzaR6-4Dc-zmy_N7mAbs7XkAl195W4-qnv401tgXoxJA4EYqicn2wPB0JPchfvd42WN3qLj0mTVd639G0ZoM4"/>
+                        <div class="p-4">
+                            <h4 class="font-headline text-lg">Morning with Local Residents</h4>
+                            <p class="text-on-surface-variant text-sm">Experience the terraces before the crowds arrive.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Floating CTA Bar -->
+    <div class="fixed bottom-0 left-0 right-0 p-8 z-40 bg-gradient-to-t from-surface via-surface to-transparent">
+        <div class="max-w-screen-xl mx-auto flex items-center justify-between gap-6">
+            <div class="hidden md:block">
+                <p class="font-label text-xs text-outline tracking-widest uppercase">From</p>
+                <div class="flex items-baseline gap-1">
+                    <span class="font-headline text-3xl text-on-surface">$240</span>
+                    <span class="text-on-surface-variant text-sm">/ person</span>
+                </div>
+            </div>
+            <button class="flex-1 md:flex-none md:w-80 bg-gradient-to-br from-primary to-primary-container text-on-primary py-5 px-8 rounded-full font-headline text-lg font-bold editorial-shadow hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-3" onclick="planTrip()">
+                Plan My Trip
+                <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+        </div>
+    </div>
+    <!-- BottomNavBar -->
+    <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#f8f9fa]/80 dark:bg-gray-900/80 backdrop-blur-xl border-t border-[#c1c6d7]/15 shadow-[0_-4px_24px_rgba(25,28,29,0.06)] rounded-t-[2rem] md:hidden">
+        <a class="flex flex-col items-center justify-center bg-[#0070ea]/10 text-[#0059bb] dark:text-blue-300 rounded-2xl px-4 py-2" data-nav-link="index.html" href="index.html">
+            <span class="material-symbols-outlined material-symbols-filled">explore</span>
+            <span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-[0.05em] mt-1">Explore</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 px-4 py-2" data-nav-link="trip-planner.html" href="trip-planner.html">
+            <span class="material-symbols-outlined">map</span>
+            <span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-[0.05em] mt-1">My Trips</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 px-4 py-2" data-nav-link="finance-planner.html" href="finance-planner.html">
+            <span class="material-symbols-outlined">payments</span>
+            <span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-[0.05em] mt-1">Finance</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 px-4 py-2" data-nav-link="profile.html" href="profile.html">
+            <span class="material-symbols-outlined">person</span>
+            <span class="font-['Be_Vietnam_Pro'] text-[10px] uppercase tracking-[0.05em] mt-1">Profile</span>
+        </a>
+    </nav>
+    <script src="js/api-config.js"></script>
+    <script src="js/navigation.js"></script>
+    <script>
+        // Attraction data (same as in explore.js)
+        const attractions = [
+            {
+                id: 1,
+                name: "Machu Picchu",
+                location: "Peru, South America",
+                coordinates: { lat: -13.1631, lon: -72.5450 },
+                category: "mountains",
+                basePrice: 1200,
+                rating: 4.9,
+                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAVplr1185h2C2f6k-QjNmv2nWzRtmppTrk-1FxQLe6hIay7VzQOG_IKMoadDBif1xy0aCxEPo5PDGMN0ISXsqbn3MvSLNeTjWkguQUmENT_Znsueiy2nQMn6zZiChgsi01FSKR2wHMgC7Z-lBFX39Lkb2gZT7ESPIje9NFGgkcpcCbldre6nMJzmJa7Dns7m52Inp1XcXzKDhZ4vpeL3VKPLh4Swm0EicaCHYfSH2Piz1yNJ3yxQT11Z_eMjlmQn4A9bk4N9JlvtQw",
+                description: "The 15th-century Inca citadel, located in the Eastern Cordillera of southern Peru.",
+                longDescription: "High atop the Andean mountains, Machu Picchu stands as a testament to human ingenuity. This 15th-century citadel remains one of the world's most enigmatic archaeological sites, offering breathtaking panoramic views and a deep spiritual connection to the ancient past.",
+                category_badge: "Wonders of the World",
+                bestVisit: "May – Oct",
+                duration: "4 – 6 Hours",
+                avgTemp: "18°C / 64°F",
+                difficulty: "Moderate",
+                experience: "Morning with Local Residents",
+                experienceDesc: "Experience the terraces before the crowds arrive.",
+                mapImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuDxzxWTMgkWXSHgELlDju-jLY3zK83BLgHPUc7cAxcuihbrlr9WP35d58vAg7_rpihshSLgEFT6RdQwNkWnmkYFJ9mHd2D_HvBfGEqh1LcU3vVJmEP_8ZnmTmROwqSNr9koqZGUtpwq3bS6qqG5QAii-5vMS4v1ljDkdrEXcod7FVJcXGfUvuXRXkSw3CDjXGDtf0MdQwpL13WHkCDgt_Eg31wW9hICmkc2HD-yw2cJTtOCSZFRweG9QflZfy0cRud9h_oK1rRsY9KJLV",
+                experienceImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuCRyBoHCft8D0ECSBjqAqrLMxOIdfQdDttRA4XmIvIPsVrGIDUAmvB0Vr2_iMtMZlBNQcVKMIrHiBPdKrod3FjFXy4pU2NTfO0gGp7AzhiBtW-GansqQqakzObS9eTSCL5IeoHZgRdkiYODsPsi7EXBgj4EcB8yu7nvSEfRGBkDDqHzgpRA3q1g8m7pzaR6-4Dc-zmy_N7mAbs7XkAl195W4-qnv401tgXoxJA4EYqicn2wPB0JPchfvd42WN3qLj0mTVd639G0ZoM4",
+                coords_display: "13.1631° S",
+                mapsUrl: "https://maps.google.com?q=Machu+Picchu",
+                price: 1200
+            },
+            {
+                id: 2,
+                name: "Santorini",
+                location: "Greece, Europe",
+                coordinates: { lat: 36.3932, lon: 25.4615 },
+                category: "beaches",
+                basePrice: 850,
+                rating: 4.8,
+                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCPwlMzOBqTm5yhn9VAEKxexTNfQSge38y6Spq2KdGHc6eZv2bWL3sdPy8KTsx464TkBvcmLhj1_JiF38PTjm8TPzLiiNh5wdf5ac8NzHqDiYgHW45Y_yvFb2R_9D6tKqFw--NeeAcjYnFhSsPDhFM9SDGcGfFjFr4qckt0jb8j_lcuUfG5d5c_Cf9DZu_-aK6IHZKx18hsJz-1w-sZOH_qWtbeiwxIEakZaEd1qkU_YywJRW1zbUCWJG3ZXSr_T-ULuj4W2vZ0LIcy",
+                description: "Aegean architectural marvel with white-washed buildings and blue domes.",
+                longDescription: "Experience the iconic white-washed buildings and blue-domed churches perched on volcanic cliffs. Santorini offers stunning sunsets, pristine beaches, and a romantic atmosphere perfect for travelers seeking Mediterranean charm.",
+                category_badge: "Island Paradise",
+                bestVisit: "Apr – Oct",
+                duration: "2 – 3 Days",
+                avgTemp: "24°C / 75°F",
+                difficulty: "Easy",
+                experience: "Sunset at Oia",
+                experienceDesc: "Watch the legendary Santorini sunset from the charming village of Oia.",
+                mapImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuDxzxWTMgkWXSHgELlDju-jLY3zK83BLgHPUc7cAxcuihbrlr9WP35d58vAg7_rpihshSLgEFT6RdQwNkWnmkYFJ9mHd2D_HvBfGEqh1LcU3vVJmEP_8ZnmTmROwqSNr9koqZGUtpwq3bS6qqG5QAii-5vMS4v1ljDkdrEXcod7FVJcXGfUvuXRXkSw3CDjXGDtf0MdQwpL13WHkCDgt_Eg31wW9hICmkc2HD-yw2cJTtOCSZFRweG9QflZfy0cRud9h_oK1rRsY9KJLV",
+                experienceImage: "https://images.unsplash.com/photo-1483729558449-99daa64bbb5e?w=500",
+                coords_display: "36.3932° N",
+                mapsUrl: "https://maps.google.com?q=Santorini",
+                price: 850
+            },
+            {
+                id: 3,
+                name: "Tokyo",
+                location: "Japan, Asia",
+                coordinates: { lat: 35.6762, lon: 139.6503 },
+                category: "cities",
+                basePrice: 1450,
+                rating: 4.7,
+                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAvn1tZW7B5EmWzDv06em8ImoTM9q4Ugb0xh_dAUXHEscleHPf02_DGRJKIEX3Te_2xufSeGh_MwRAH5zQnPp7opiiNiwER8pslQaQFevOo1FrKNmrrSEX0refpmFmvFXLJo2gCf_toVmpZ6zFMHPBh45T_nuCVz1FxUK_74ohxJZp3GasFw_tOykTMBHiOaetZ9PZ1XISDcgZ2jlPMoIh0KDT7ZNPRbyrc8XHMv0QeY2PRnsmqt8A-3sXL3a-WJ2qLWBKeodCnSwkY",
+                description: "Neon-lit streets and ancient tradition in Japan's vibrant capital.",
+                longDescription: "Tokyo seamlessly blends ancient traditions with cutting-edge modernity. From serene temples and traditional tea houses to neon-lit streets and futuristic technology, Tokyo offers an unforgettable experience.",
+                category_badge: "Modern Metropolis",
+                bestVisit: "Mar – May, Sep – Nov",
+                duration: "3 – 5 Days",
+                avgTemp: "18°C / 64°F",
+                difficulty: "Easy",
+                experience: "Shibuya Crossing at Night",
+                experienceDesc: "Experience the world's busiest pedestrian crossing in all its neon-lit glory.",
+                mapImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuDxzxWTMgkWXSHgELlDju-jLY3zK83BLgHPUc7cAxcuihbrlr9WP35d58vAg7_rpihshSLgEFT6RdQwNkWnmkYFJ9mHd2D_HvBfGEqh1LcU3vVJmEP_8ZnmTmROwqSNr9koqZGUtpwq3bS6qqG5QAii-5vMS4v1ljDkdrEXcod7FVJcXGfUvuXRXkSw3CDjXGDtf0MdQwpL13WHkCDgt_Eg31wW9hICmkc2HD-yw2cJTtOCSZFRweG9QflZfy0cRud9h_oK1rRsY9KJLV",
+                experienceImage: "https://images.unsplash.com/photo-1540080306560-daa25f2f6f85?w=500",
+                coords_display: "35.6762° N",
+                mapsUrl: "https://maps.google.com?q=Tokyo",
+                price: 1450
+            },
+            {
+                id: 4,
+                name: "Amalfi Coast",
+                location: "Italy, Europe",
+                coordinates: { lat: 40.6333, lon: 14.6029 },
+                category: "beaches",
+                basePrice: 1100,
+                rating: 4.6,
+                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBknrcmpzq-O2URZXMeLI-w0ZLsrkbuDlQHzMiwBnTXungIF50AoFUp99yN3zI7AfaElFnXssbTzSipUthd0Sau4T62TKBR1CneyK7UxmPW5FvU_t_HUgSbCkqzIYpFIc2mwz8UUeUs3oWjAsYZQMSPm3NV0PUxGYbFTQkWld8Pz11hkJg9MfDuIVRQ-LunUYEDyyKGJcg8ods89otxmF4zpwupd96huDknmLhXua5sYHIoi-VVBHzK6e_QThzh8UA76Y7PNf5RAty",
+                description: "Picturesque coastal town with colorful pastel houses and turquoise Mediterranean waters.",
+                longDescription: "The Amalfi Coast is a breathtaking stretch of coastline featuring colorful villages perched on cliff sides, winding coastal roads, and pristine Mediterranean beaches.",
+                category_badge: "Coastal Gem",
+                bestVisit: "May – Sep",
+                duration: "2 – 3 Days",
+                avgTemp: "22°C / 72°F",
+                difficulty: "Easy",
+                experience: "Positano Sunset",
+                experienceDesc: "Stroll through the charming streets of Positano as the sun sets over the sea.",
+                mapImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuDxzxWTMgkWXSHgELlDju-jLY3zK83BLgHPUc7cAxcuihbrlr9WP35d58vAg7_rpihshSLgEFT6RdQwNkWnmkYFJ9mHd2D_HvBfGEqh1LcU3vVJmEP_8ZnmTmROwqSNr9koqZGUtpwq3bS6qqG5QAii-5vMS4v1ljDkdrEXcod7FVJcXGfUvuXRXkSw3CDjXGDtf0MdQwpL13WHkCDgt_Eg31wW9hICmkc2HD-yw2cJTtOCSZFRweG9QflZfy0cRud9h_oK1rRsY9KJLV",
+                experienceImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500",
+                coords_display: "40.6333° N",
+                mapsUrl: "https://maps.google.com?q=Amalfi+Coast",
+                price: 1100
+            },
+            {
+                id: 5,
+                name: "Eiffel Tower",
+                location: "France, Europe",
+                coordinates: { lat: 48.8584, lon: 2.2945 },
+                category: "cities",
+                basePrice: 750,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800",
+                description: "The iconic iron lattice tower in Paris, one of the most visited monuments in the world.",
+                longDescription: "The Eiffel Tower is the most iconic symbol of Paris. Built in 1889, this iron lattice monument offers panoramic views of the City of Light and remains one of the most visited attractions globally.",
+                category_badge: "Iconic Monument",
+                bestVisit: "Apr – Oct",
+                duration: "2 – 3 Hours",
+                avgTemp: "16°C / 61°F",
+                difficulty: "Easy",
+                experience: "Night Illumination",
+                experienceDesc: "Experience the tower's magical light show after sunset.",
+                mapImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuDxzxWTMgkWXSHgELlDju-jLY3zK83BLgHPUc7cAxcuihbrlr9WP35d58vAg7_rpihshSLgEFT6RdQwNkWnmkYFJ9mHd2D_HvBfGEqh1LcU3vVJmEP_8ZnmTmROwqSNr9koqZGUtpwq3bS6qqG5QAii-5vMS4v1ljDkdrEXcod7FVJcXGfUvuXRXkSw3CDjXGDtf0MdQwpL13WHkCDgt_Eg31wW9hICmkc2HD-yw2cJTtOCSZFRweG9QflZfy0cRud9h_oK1rRsY9KJLV",
+                experienceImage: "https://images.unsplash.com/photo-1511739001486-6bfe966ce51b?w=500",
+                coords_display: "48.8584° N",
+                mapsUrl: "https://maps.google.com?q=Eiffel+Tower",
+                price: 750
+            },
+            {
+                id: 6,
+                name: "Maldives",
+                location: "Indian Ocean, Asia",
+                coordinates: { lat: 4.1694, lon: 73.5093 },
+                category: "beaches",
+                basePrice: 2200,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800",
+                description: "Luxurious tropical island nation known for crystal-clear waters and overwater bungalows.",
+                longDescription: "The Maldives is a tropical paradise featuring pristine white-sand beaches, crystal-clear waters teeming with marine life, and luxurious overwater bungalows.",
+                category_badge: "Tropical Paradise",
+                bestVisit: "Nov – Apr",
+                duration: "3 – 5 Days",
+                avgTemp: "27°C / 81°F",
+                difficulty: "Easy",
+                experience: "Snorkeling Adventure",
+                experienceDesc: "Explore vibrant coral reefs and exotic marine life.",
+                mapImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuDxzxWTMgkWXSHgELlDju-jLY3zK83BLgHPUc7cAxcuihbrlr9WP35d58vAg7_rpihshSLgEFT6RdQwNkWnmkYFJ9mHd2D_HvBfGEqh1LcU3vVJmEP_8ZnmTmROwqSNr9koqZGUtpwq3bS6qqG5QAii-5vMS4v1ljDkdrEXcod7FVJcXGfUvuXRXkSw3CDjXGDtf0MdQwpL13WHkCDgt_Eg31wW9hICmkc2HD-yw2cJTtOCSZFRweG9QflZfy0cRud9h_oK1rRsY9KJLV",
+                experienceImage: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500",
+                coords_display: "4.1694° N",
+                mapsUrl: "https://maps.google.com?q=Maldives",
+                price: 2200
+            },
+            {
+                id: 7,
+                name: "Swiss Alps",
+                location: "Switzerland, Europe",
+                coordinates: { lat: 46.8182, lon: 8.2275 },
+                category: "mountains",
+                basePrice: 1800,
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+                description: "Stunning mountain range offering world-class skiing and scenic alpine villages.",
+                longDescription: "The Swiss Alps are a majestic mountain range offering world-class skiing, hiking, and breathtaking alpine scenery. Charming mountain villages and luxury resorts complete the experience.",
+                category_badge: "Alpine Wonder",
+                bestVisit: "Dec – Mar (skiing), Jun – Sep (hiking)",
+                duration: "3 – 7 Days",
+                avgTemp: "5°C / 41°F",
+                difficulty: "Moderate to Hard",
+                experience: "Alpine Hiking",
+                experienceDesc: "Trek through stunning mountain passes with panoramic views.",
+                mapImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuDxzxWTMgkWXSHgELlDju-jLY3zK83BLgHPUc7cAxcuihbrlr9WP35d58vAg7_rpihshSLgEFT6RdQwNkWnmkYFJ9mHd2D_HvBfGEqh1LcU3vVJmEP_8ZnmTmROwqSNr9koqZGUtpwq3bS6qqG5QAii-5vMS4v1ljDkdrEXcod7FVJcXGfUvuXRXkSw3CDjXGDtf0MdQwpL13WHkCDgt_Eg31wW9hICmkc2HD-yw2cJTtOCSZFRweG9QflZfy0cRud9h_oK1rRsY9KJLV",
+                experienceImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500",
+                coords_display: "46.8182° N",
+                mapsUrl: "https://maps.google.com?q=Swiss+Alps",
+                price: 1800
+            },
+            {
+                id: 8,
+                name: "New York City",
+                location: "USA, North America",
+                coordinates: { lat: 40.7128, lon: -74.0060 },
+                category: "cities",
+                basePrice: 950,
+                rating: 4.6,
+                image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=800",
+                description: "The city that never sleeps with iconic skyscrapers, Broadway shows, and world-class museums.",
+                longDescription: "New York City is a vibrant metropolis known for its iconic skyline, Broadway theaters, world-class museums, diverse neighborhoods, and endless entertainment options.",
+                category_badge: "The Big Apple",
+                bestVisit: "Sep – Nov, Mar – May",
+                duration: "3 – 5 Days",
+                avgTemp: "15°C / 59°F",
+                difficulty: "Easy",
+                experience: "Times Square Energy",
+                experienceDesc: "Experience the electric energy of Times Square day and night.",
+                mapImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuDxzxWTMgkWXSHgELlDju-jLY3zK83BLgHPUc7cAxcuihbrlr9WP35d58vAg7_rpihshSLgEFT6RdQwNkWnmkYFJ9mHd2D_HvBfGEqh1LcU3vVJmEP_8ZnmTmROwqSNr9koqZGUtpwq3bS6qqG5QAii-5vMS4v1ljDkdrEXcod7FVJcXGfUvuXRXkSw3CDjXGDtf0MdQwpL13WHkCDgt_Eg31wW9hICmkc2HD-yw2cJTtOCSZFRweG9QflZfy0cRud9h_oK1rRsY9KJLV",
+                experienceImage: "https://images.unsplash.com/photo-1490149494706-5a556aea6fe3?w=500",
+                coords_display: "40.7128° N",
+                mapsUrl: "https://maps.google.com?q=New+York+City",
+                price: 950
+            },
+            {
+                id: 9,
+                name: "Bali Beaches",
+                location: "Indonesia, Asia",
+                coordinates: { lat: -8.6705, lon: 115.2126 },
+                category: "beaches",
+                basePrice: 650,
+                rating: 4.5,
+                image: "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=800",
+                description: "Pristine tropical beaches with ancient temples, vibrant culture, and perfect weather year-round.",
+                longDescription: "Bali offers pristine tropical beaches, ancient temples, vibrant culture, and world-class resorts. From rice terraces to spiritual temples, Bali is a perfect blend of relaxation and adventure.",
+                category_badge: "Tropical Escape",
+                bestVisit: "Apr – Oct",
+                duration: "3 – 7 Days",
+                avgTemp: "27°C / 81°F",
+                difficulty: "Easy",
+                experience: "Temple Exploration",
+                experienceDesc: "Visit ancient temples and immerse yourself in Balinese spirituality.",
+                mapImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuDxzxWTMgkWXSHgELlDju-jLY3zK83BLgHPUc7cAxcuihbrlr9WP35d58vAg7_rpihshSLgEFT6RdQwNkWnmkYFJ9mHd2D_HvBfGEqh1LcU3vVJmEP_8ZnmTmROwqSNr9koqZGUtpwq3bS6qqG5QAii-5vMS4v1ljDkdrEXcod7FVJcXGfUvuXRXkSw3CDjXGDtf0MdQwpL13WHkCDgt_Eg31wW9hICmkc2HD-yw2cJTtOCSZFRweG9QflZfy0cRud9h_oK1rRsY9KJLV",
+                experienceImage: "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=500",
+                coords_display: "-8.6705° S",
+                mapsUrl: "https://maps.google.com?q=Bali",
+                price: 650
+            },
+            {
+                id: 10,
+                name: "Rocky Mountains",
+                location: "Canada, North America",
+                coordinates: { lat: 53.1109, lon: -117.2171 },
+                category: "mountains",
+                basePrice: 1300,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+                description: "Majestic mountain range spanning North America with pristine wilderness and outdoor adventures.",
+                longDescription: "The Rocky Mountains span North America with pristine wilderness, stunning peaks, and incredible outdoor adventures including hiking, skiing, and wildlife viewing.",
+                category_badge: "Mountain Paradise",
+                bestVisit: "Jun – Sep (hiking), Dec – Mar (skiing)",
+                duration: "3 – 7 Days",
+                avgTemp: "10°C / 50°F",
+                difficulty: "Moderate",
+                experience: "Wildlife Safari",
+                experienceDesc: "Spot bear, elk, and other wildlife in their natural habitat.",
+                mapImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuDxzxWTMgkWXSHgELlDju-jLY3zK83BLgHPUc7cAxcuihbrlr9WP35d58vAg7_rpihshSLgEFT6RdQwNkWnmkYFJ9mHd2D_HvBfGEqh1LcU3vVJmEP_8ZnmTmROwqSNr9koqZGUtpwq3bS6qqG5QAii-5vMS4v1ljDkdrEXcod7FVJcXGfUvuXRXkSw3CDjXGDtf0MdQwpL13WHkCDgt_Eg31wW9hICmkc2HD-yw2cJTtOCSZFRweG9QflZfy0cRud9h_oK1rRsY9KJLV",
+                experienceImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500",
+                coords_display: "53.1109° N",
+                mapsUrl: "https://maps.google.com?q=Rocky+Mountains",
+                price: 1300
+            }
+        ];
+
+        // Function to get attraction ID from URL
+        function getAttractionIdFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return parseInt(params.get('id')) || 1;
+        }
+
+        // Function to load and display attraction details
+        function loadAttractionDetails() {
+            const attractionId = getAttractionIdFromUrl();
+            const attraction = attractions.find(a => a.id === attractionId) || attractions[0];
+
+            // Update page title
+            document.title = `Voyager | ${attraction.name}`;
+
+            // Update hero section image
+            const heroImg = document.querySelector('img[alt="Machu Picchu"]');
+            if (heroImg) {
+                heroImg.src = attraction.image;
+                heroImg.alt = attraction.name;
+            }
+            
+            // Update badge
+            const badge = document.querySelector('[data-category-badge]');
+            if (badge) badge.textContent = attraction.category_badge;
+
+            // Update heading - split name by spaces and add line breaks
+            const headingH2 = document.querySelector('.absolute.bottom-0 h2');
+            if (headingH2) {
+                const words = attraction.name.split(' ');
+                if (words.length === 1) {
+                    headingH2.innerHTML = words[0];
+                } else if (words.length === 2) {
+                    headingH2.innerHTML = `${words[0]} <br/>${words[1]}`;
+                } else {
+                    // For longer names, split after first word
+                    headingH2.innerHTML = `${words[0]} <br/>${words.slice(1).join(' ')}`;
+                }
+            }
+
+            // Update location
+            const locationText = document.querySelector('[data-location-text]');
+            if (locationText) locationText.textContent = attraction.location;
+
+            // Update main heading and description
+            const headingH3 = document.querySelector('.space-y-4 h3');
+            if (headingH3) headingH3.textContent = `${attraction.name} - A journey of discovery.`;
+
+            const descP = document.querySelector('.space-y-4 > p.text-on-surface-variant');
+            if (descP) descP.textContent = attraction.longDescription;
+
+            // Update stats
+            const stats = document.querySelectorAll('.grid.grid-cols-2 > div');
+            const statLabels = ['Best Visit', 'Duration', 'Avg Temp', 'Difficulty'];
+            const statValues = [attraction.bestVisit, attraction.duration, attraction.avgTemp, attraction.difficulty];
+            
+            stats.forEach((stat, index) => {
+                const valueEl = stat.querySelector('p.font-headline');
+                if (valueEl) valueEl.textContent = statValues[index];
+            });
+
+            // Update map image
+            const mapImg = document.querySelector('img[alt="Map"]');
+            if (mapImg) mapImg.src = attraction.mapImage;
+
+            // Update coordinates and maps
+            const coordsDisplay = document.querySelector('[data-coords-display]');
+            if (coordsDisplay) coordsDisplay.textContent = `Coordinates: ${attraction.coords_display}`;
+
+            const mapsBtn = document.querySelector('[data-maps-btn]');
+            if (mapsBtn) mapsBtn.onclick = () => window.open(attraction.mapsUrl);
+
+            // Update experience section
+            const experienceCard = document.querySelector('.bg-surface-container-lowest.p-2.rounded-lg');
+            if (experienceCard) {
+                const expTitle = experienceCard.querySelector('h4');
+                const expDesc = experienceCard.querySelector('p.text-on-surface-variant');
+                if (expTitle) expTitle.textContent = attraction.experience;
+                if (expDesc) expDesc.textContent = attraction.experienceDesc;
+            }
+
+            // Update experience image
+            const expImg = document.querySelector('img[alt="Machu Picchu Experience"]');
+            if (expImg) {
+                expImg.src = attraction.experienceImage;
+                expImg.alt = attraction.experience;
+            }
+
+            // Update price
+            const priceSpan = document.querySelector('.flex-1 .md\\:block span.font-headline.text-3xl');
+            const priceElements = document.querySelectorAll('.font-headline.text-3xl');
+            if (priceElements.length > 0) {
+                // Find the price element (it should be in the floating CTA bar)
+                for (let el of priceElements) {
+                    if (el.textContent.includes('$') || el.parentElement?.querySelector('.text-sm')?.textContent === '/ person') {
+                        el.textContent = `$${Math.round(attraction.price)}`;
+                        break;
+                    }
+                }
+                // Fallback: update all h3 elements with price format
+                if (!Array.from(priceElements).some(el => el.textContent.startsWith('$'))) {
+                    const allH3 = document.querySelectorAll('h3, span.font-headline');
+                    for (let el of allH3) {
+                        if (el.textContent === '$240') {
+                            el.textContent = `$${Math.round(attraction.price)}`;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Save selected destination and navigate to trip planner
+        function planTrip() {
+            const attractionId = getAttractionIdFromUrl();
+            const attraction = attractions.find(a => a.id === attractionId) || attractions[0];
+            
+            // Store the selected destination in localStorage
+            localStorage.setItem('selectedDestination', JSON.stringify({
+                name: attraction.name,
+                location: attraction.location,
+                image: attraction.image,
+                description: attraction.description,
+                id: attraction.id
+            }));
+            
+            // Navigate to trip planner
+            window.location.href = 'trip-planner.html';
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAttractionDetails();
+        });
+    </script>
+</body>
+</html>
