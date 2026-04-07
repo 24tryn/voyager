@@ -179,32 +179,7 @@ You can explore with static attractions immediately!
 - Documentation links
 - Demo mode option
 
-## � Deployment to GitHub Pages
 
-### Quick Deploy (Recommended)
-
-1. **Create a GitHub Repository**
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit: Voyager travel app"
-   git branch -M main
-   git remote add origin https://github.com/YOUR_USERNAME/voyager.git
-   git push -u origin main
-   ```
-
-2. **Enable GitHub Pages**
-   - Go to repository **Settings** → **Pages**
-   - Select **Source**: Deploy from a branch
-   - Select **Branch**: main, /(root)
-   - Click **Save**
-   - Your app will be live at: `https://YOUR_USERNAME.github.io/voyager/`
-
-3. **That's it!** 🎉
-   - App automatically updates when you push changes
-   - Uses live Mapbox API with hardcoded token
-   - No server setup needed
-   - Works on all devices
 
 ### Production Features Enabled
 
