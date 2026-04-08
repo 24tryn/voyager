@@ -221,7 +221,8 @@ const DirectionsManager = {
             driving: (distanceInMiles * 0.625).toFixed(2), // $0.625 per mile avg
             transit: Math.max(2.50, (distanceInMiles * 0.15).toFixed(2)), // ~$0.15 per mile, min $2.50
             walking: 0, // Free
-            bicycling: 0 // Free
+            bicycling: 0, // Free
+            flight: Math.max(150, (distanceInMiles * 0.25).toFixed(2)) // ~$0.25 per mile, min $150 base fare
         };
     },
 

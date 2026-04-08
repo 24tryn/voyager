@@ -3,6 +3,35 @@
  * Handles route calculations, display, and trip management
  */
 
+/**
+ * Convert coordinates to user-friendly text format
+ */
+function formatCoordinates(latitude, longitude) {
+    const latDirection = latitude >= 0 ? 'N' : 'S';
+    const lonDirection = longitude >= 0 ? 'E' : 'W';
+    const latValue = Math.abs(latitude).toFixed(2);
+    const lonValue = Math.abs(longitude).toFixed(2);
+    
+    return `${latValue}°${latDirection}, ${lonValue}°${lonDirection}`;
+}
+
+/**
+ * Get general area from coordinates (direction + distance approximation)
+ */
+function getAreaFromCoordinates(latitude, longitude) {
+    // Determine general direction
+    let latText = latitude > 0 ? 'Northern' : 'Southern';
+    let lonText = longitude > 0 ? 'Eastern' : 'Western';
+    
+    // Get hemisphere info
+    const hemisphere = latitude > 0 ? 'Northern Hemisphere' : 'Southern Hemisphere';
+    
+    return {
+        formatted: `${latText}, ${lonText} Location`,
+        full: `${latText}, ${lonText} - ${hemisphere}`
+    };
+}
+
 // Static attractions for suggestions/fallback
 const staticAttractions = [
     { name: "Machu Picchu", location: "Peru, South America", lat: -13.1631, lon: -72.5450 },
@@ -172,7 +201,11 @@ async function handleDetectLocation() {
             currentTrip.startLocation.name = address.address;
             fromLocationInput.value = address.address;
         } else {
-            fromLocationInput.value = `${location.latitude.toFixed(4)}, ${location.longitude.toFixed(4)}`;
+            // If address lookup fails, show user-friendly coordinate format
+            const areaInfo = getAreaFromCoordinates(location.latitude, location.longitude);
+            const coordFormat = formatCoordinates(location.latitude, location.longitude);
+            currentTrip.startLocation.name = areaInfo.formatted;
+            fromLocationInput.value = `${areaInfo.formatted} (${coordFormat})`;
         }
 
         document.getElementById('from-location-display').classList.remove('hidden');
@@ -281,6 +314,120 @@ async function handleDestinationChange() {
 }
 
 /**
+ * Calculate estimated routes using Haversine formula (fallback)
+ */
+function calculateEstimatedRoutes(origin, destination) {
+    // Calculate straight-line distance (most accurate for distance)
+    const distance = GeolocationManager.calculateDistance(
+        origin.lat,
+        origin.lon,
+        destination.lat,
+        destination.lon
+    );
+
+    // Create estimated routes with different transport modes
+    const estimatedRoutes = {};
+
+    // Driving (assumes 25% longer route due to roads)
+    const drivingDistance = distance * 1.25;
+    estimatedRoutes.driving = {
+        distance: DirectionsManager.formatDistance(drivingDistance * 1609.34), // Convert miles to meters
+        distanceValue: drivingDistance * 1609.34,
+        duration: DirectionsManager.formatDuration(drivingDistance * 120), // Avg 30 mph = 120 seconds per mile
+        durationValue: drivingDistance * 120,
+        steps: [{
+            instruction: 'Travel to destination',
+            distance: DirectionsManager.formatDistance(drivingDistance * 1609.34),
+            duration: DirectionsManager.formatDuration(drivingDistance * 120),
+            start: origin,
+            end: destination
+        }],
+        mode: 'driving',
+        source: 'Estimated (straight-line distance)',
+        isEstimated: true
+    };
+
+    // Walking (assumes 30% longer route)
+    const walkingDistance = distance * 1.30;
+    estimatedRoutes.walking = {
+        distance: DirectionsManager.formatDistance(walkingDistance * 1609.34),
+        distanceValue: walkingDistance * 1609.34,
+        duration: DirectionsManager.formatDuration(walkingDistance * 1200), // Avg 3 mph = 1200 seconds per mile
+        durationValue: walkingDistance * 1200,
+        steps: [{
+            instruction: 'Walk to destination',
+            distance: DirectionsManager.formatDistance(walkingDistance * 1609.34),
+            duration: DirectionsManager.formatDuration(walkingDistance * 1200),
+            start: origin,
+            end: destination
+        }],
+        mode: 'walking',
+        source: 'Estimated (straight-line distance)',
+        isEstimated: true
+    };
+
+    // Bicycling (assumes 20% longer route)
+    const bicyclingDistance = distance * 1.20;
+    estimatedRoutes.bicycling = {
+        distance: DirectionsManager.formatDistance(bicyclingDistance * 1609.34),
+        distanceValue: bicyclingDistance * 1609.34,
+        duration: DirectionsManager.formatDuration(bicyclingDistance * 480), // Avg 12.5 mph = 480 seconds per mile
+        durationValue: bicyclingDistance * 480,
+        steps: [{
+            instruction: 'Cycle to destination',
+            distance: DirectionsManager.formatDistance(bicyclingDistance * 1609.34),
+            duration: DirectionsManager.formatDuration(bicyclingDistance * 480),
+            start: origin,
+            end: destination
+        }],
+        mode: 'bicycling',
+        source: 'Estimated (straight-line distance)',
+        isEstimated: true
+    };
+
+    // Transit (assumes similar to driving + waiting time)
+    const transitDistance = distance * 1.25;
+    estimatedRoutes.transit = {
+        distance: DirectionsManager.formatDistance(transitDistance * 1609.34),
+        distanceValue: transitDistance * 1609.34,
+        duration: DirectionsManager.formatDuration((transitDistance * 120) + 600), // Add 10 min waiting time
+        durationValue: (transitDistance * 120) + 600,
+        steps: [{
+            instruction: 'Use public transit to destination',
+            distance: DirectionsManager.formatDistance(transitDistance * 1609.34),
+            duration: DirectionsManager.formatDuration((transitDistance * 120) + 600),
+            start: origin,
+            end: destination
+        }],
+        mode: 'transit',
+        source: 'Estimated (straight-line distance)',
+        isEstimated: true
+    };
+
+    // Flight (straight-line distance, fastest mode)
+    // Airlines fly relatively straight paths, plus ~30 mins for takeoff/landing and airport procedures
+    const flightTime = (distance / 500) * 3600 + 1800; // 500 mph cruise speed + 30 min overhead
+    estimatedRoutes.flight = {
+        distance: DirectionsManager.formatDistance(distance * 1609.34),
+        distanceValue: distance * 1609.34,
+        duration: DirectionsManager.formatDuration(flightTime), // Flight time with overhead
+        durationValue: flightTime,
+        steps: [{
+            instruction: 'Fly to destination',
+            distance: DirectionsManager.formatDistance(distance * 1609.34),
+            duration: DirectionsManager.formatDuration(flightTime),
+            start: origin,
+            end: destination
+        }],
+        mode: 'flight',
+        source: 'Estimated (straight-line distance)',
+        isEstimated: true
+    };
+
+    return estimatedRoutes;
+}
+
+/**
  * Calculate routes with all transport methods
  */
 async function calculateRoutes() {
@@ -293,16 +440,15 @@ async function calculateRoutes() {
         const origin = currentTrip.startLocation.coordinates;
         const destination = currentTrip.endLocation.coordinates;
 
-        // Available transport modes
-        const modes = ['driving', 'walking', 'bicycling', 'transit'];
+        // Available transport modes (including flight)
+        const modes = ['driving', 'walking', 'bicycling', 'transit', 'flight'];
 
         // Get all routes
-        const routes = await DirectionsManager.getRoutes(origin, destination, { modes });
+        let routes = await DirectionsManager.getRoutes(origin, destination, { modes });
 
+        // If API fails, use estimated routes
         if (Object.keys(routes).length === 0) {
-            showError('Could not calculate routes. Please check your API configuration.');
-            showLoading(false);
-            return;
+            routes = calculateEstimatedRoutes(origin, destination);
         }
 
         currentTrip.routes = routes;
@@ -332,18 +478,37 @@ async function calculateRoutes() {
 function displayRoutes(routes) {
     routesContainer.innerHTML = '';
 
+    // Check if any route is estimated
+    const hasEstimatedRoutes = Object.values(routes).some(route => route.isEstimated);
+    
+    // Show notification if using estimated routes
+    if (hasEstimatedRoutes) {
+        const notificationDiv = document.createElement('div');
+        notificationDiv.className = 'mb-6 bg-tertiary-container/20 border border-tertiary text-on-surface-variant p-4 rounded-lg flex items-start gap-3';
+        notificationDiv.innerHTML = `
+            <span class="material-symbols-outlined text-tertiary mt-0.5">info</span>
+            <div>
+                <p class="font-semibold text-on-surface mb-1">Estimated Routes Displayed</p>
+                <p class="text-sm">API unavailable. Showing estimated distances and times based on direct distance calculations.</p>
+            </div>
+        `;
+        routesContainer.appendChild(notificationDiv);
+    }
+
     const modeEmojis = {
         driving: '🚗',
         walking: '🚶',
         bicycling: '🚴',
-        transit: '🚌'
+        transit: '🚌',
+        flight: '✈️'
     };
 
     const modeNames = {
         driving: 'Driving',
         walking: 'Walking',
         bicycling: 'Cycling',
-        transit: 'Public Transit'
+        transit: 'Public Transit',
+        flight: 'Flight'
     };
 
     Object.entries(routes).forEach(([mode, route]) => {
@@ -359,6 +524,7 @@ function displayRoutes(routes) {
                     <h3 class="text-xl font-semibold text-on-surface mb-1 flex items-center gap-2">
                         <span class="text-2xl">${modeEmojis[mode]}</span>
                         ${modeNames[mode]}
+                        ${route.isEstimated ? '<span class="text-xs bg-tertiary-container text-on-tertiary-container px-2 py-1 rounded-full ml-2">Estimated</span>' : ''}
                     </h3>
                     <p class="text-sm text-on-surface-variant">${route.source}</p>
                 </div>
